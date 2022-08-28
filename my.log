@@ -1,0 +1,168 @@
+2022-08-26 16:44:25.187  INFO 313650 --- [main] c.e.s.SpringbootProjectApplication       : Starting SpringbootProjectApplication using Java 11.0.16 on mina-server with PID 313650 (/home/mina/Desktop/spring-bootProject/target/classes started by mina in /home/mina/Desktop/spring-bootProject)
+2022-08-26 16:44:25.190 DEBUG 313650 --- [main] c.e.s.SpringbootProjectApplication       : Running with Spring Boot v2.7.1, Spring v5.3.21
+2022-08-26 16:44:25.191  INFO 313650 --- [main] c.e.s.SpringbootProjectApplication       : No active profile set, falling back to 1 default profile: "default"
+2022-08-26 16:44:26.941  INFO 313650 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-08-26 16:44:26.953  INFO 313650 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-08-26 16:44:26.953  INFO 313650 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.64]
+2022-08-26 16:44:27.101  INFO 313650 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-08-26 16:44:27.101  INFO 313650 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1846 ms
+2022-08-26 16:44:27.336 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : HikariPool-1 - configuration:
+2022-08-26 16:44:27.341 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : allowPoolSuspension................................false
+2022-08-26 16:44:27.342 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : autoCommit................................true
+2022-08-26 16:44:27.342 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : catalog................................none
+2022-08-26 16:44:27.342 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : connectionInitSql................................none
+2022-08-26 16:44:27.342 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : connectionTestQuery................................none
+2022-08-26 16:44:27.343 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : connectionTimeout................................30000
+2022-08-26 16:44:27.343 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : dataSource................................none
+2022-08-26 16:44:27.343 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : dataSourceClassName................................none
+2022-08-26 16:44:27.343 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : dataSourceJNDI................................none
+2022-08-26 16:44:27.344 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : dataSourceProperties................................{password=<masked>}
+2022-08-26 16:44:27.344 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : driverClassName................................none
+2022-08-26 16:44:27.344 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : exceptionOverrideClassName................................none
+2022-08-26 16:44:27.344 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : healthCheckProperties................................{}
+2022-08-26 16:44:27.345 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : healthCheckRegistry................................none
+2022-08-26 16:44:27.345 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : idleTimeout................................600000
+2022-08-26 16:44:27.345 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : initializationFailTimeout................................1
+2022-08-26 16:44:27.345 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : isolateInternalQueries................................false
+2022-08-26 16:44:27.346 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : jdbcUrl................................jdbc:mysql://localhost:3306/myapp?profileSQL=true
+2022-08-26 16:44:27.346 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : keepaliveTime................................0
+2022-08-26 16:44:27.346 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : leakDetectionThreshold................................0
+2022-08-26 16:44:27.346 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : maxLifetime................................1800000
+2022-08-26 16:44:27.346 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : maximumPoolSize................................10
+2022-08-26 16:44:27.347 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : metricRegistry................................none
+2022-08-26 16:44:27.347 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : metricsTrackerFactory................................none
+2022-08-26 16:44:27.347 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : minimumIdle................................10
+2022-08-26 16:44:27.347 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : password................................<masked>
+2022-08-26 16:44:27.348 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : poolName................................"HikariPool-1"
+2022-08-26 16:44:27.348 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : readOnly................................false
+2022-08-26 16:44:27.348 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : registerMbeans................................false
+2022-08-26 16:44:27.348 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : scheduledExecutor................................none
+2022-08-26 16:44:27.348 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : schema................................none
+2022-08-26 16:44:27.349 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : threadFactory................................internal
+2022-08-26 16:44:27.349 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : transactionIsolation................................default
+2022-08-26 16:44:27.349 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : username................................"mina"
+2022-08-26 16:44:27.349 DEBUG 313650 --- [main] com.zaxxer.hikari.HikariConfig           : validationTimeout................................5000
+2022-08-26 16:44:27.350  INFO 313650 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-08-26 16:44:27.754  INFO 313650 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-08-26 16:44:28.174 DEBUG 313650 --- [main] c.e.s.service.MyEmailService             : Adding Security provider *BouncyCastleProvider*
+2022-08-26 16:44:28.744 DEBUG 313650 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-08-26 16:44:28.866 DEBUG 313650 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 15 mappings in 'requestMappingHandlerMapping'
+2022-08-26 16:44:28.908 DEBUG 313650 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2022-08-26 16:44:28.923 DEBUG 313650 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-08-26 16:44:29.233  INFO 313650 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoint(s) beneath base path '/actuator'
+2022-08-26 16:44:29.273  INFO 313650 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-08-26 16:44:29.289  INFO 313650 --- [main] c.e.s.SpringbootProjectApplication       : Started SpringbootProjectApplication in 4.686 seconds (JVM running for 5.127)
+2022-08-26 16:44:49.530  INFO 313650 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-08-26 16:44:49.543  INFO 313650 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-08-26 16:44:58.999  INFO 313774 --- [main] c.e.s.SpringbootProjectApplication       : Starting SpringbootProjectApplication using Java 11.0.16 on mina-server with PID 313774 (/home/mina/Desktop/spring-bootProject/target/classes started by mina in /home/mina/Desktop/spring-bootProject)
+2022-08-26 16:44:59.002 DEBUG 313774 --- [main] c.e.s.SpringbootProjectApplication       : Running with Spring Boot v2.7.1, Spring v5.3.21
+2022-08-26 16:44:59.003  INFO 313774 --- [main] c.e.s.SpringbootProjectApplication       : No active profile set, falling back to 1 default profile: "default"
+2022-08-26 16:45:00.877  INFO 313774 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-08-26 16:45:00.891  INFO 313774 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-08-26 16:45:00.892  INFO 313774 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.64]
+2022-08-26 16:45:01.049  INFO 313774 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-08-26 16:45:01.049  INFO 313774 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1987 ms
+2022-08-26 16:45:01.288 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : HikariPool-1 - configuration:
+2022-08-26 16:45:01.292 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : allowPoolSuspension................................false
+2022-08-26 16:45:01.293 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : autoCommit................................true
+2022-08-26 16:45:01.293 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : catalog................................none
+2022-08-26 16:45:01.293 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : connectionInitSql................................none
+2022-08-26 16:45:01.293 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : connectionTestQuery................................none
+2022-08-26 16:45:01.294 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : connectionTimeout................................30000
+2022-08-26 16:45:01.294 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : dataSource................................none
+2022-08-26 16:45:01.294 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : dataSourceClassName................................none
+2022-08-26 16:45:01.294 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : dataSourceJNDI................................none
+2022-08-26 16:45:01.295 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : dataSourceProperties................................{password=<masked>}
+2022-08-26 16:45:01.295 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : driverClassName................................none
+2022-08-26 16:45:01.295 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : exceptionOverrideClassName................................none
+2022-08-26 16:45:01.295 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : healthCheckProperties................................{}
+2022-08-26 16:45:01.296 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : healthCheckRegistry................................none
+2022-08-26 16:45:01.296 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : idleTimeout................................600000
+2022-08-26 16:45:01.296 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : initializationFailTimeout................................1
+2022-08-26 16:45:01.296 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : isolateInternalQueries................................false
+2022-08-26 16:45:01.297 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : jdbcUrl................................jdbc:mysql://localhost:3306/myapp?profileSQL=true
+2022-08-26 16:45:01.297 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : keepaliveTime................................0
+2022-08-26 16:45:01.297 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : leakDetectionThreshold................................0
+2022-08-26 16:45:01.297 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : maxLifetime................................1800000
+2022-08-26 16:45:01.297 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : maximumPoolSize................................10
+2022-08-26 16:45:01.298 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : metricRegistry................................none
+2022-08-26 16:45:01.298 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : metricsTrackerFactory................................none
+2022-08-26 16:45:01.298 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : minimumIdle................................10
+2022-08-26 16:45:01.298 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : password................................<masked>
+2022-08-26 16:45:01.298 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : poolName................................"HikariPool-1"
+2022-08-26 16:45:01.298 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : readOnly................................false
+2022-08-26 16:45:01.299 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : registerMbeans................................false
+2022-08-26 16:45:01.299 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : scheduledExecutor................................none
+2022-08-26 16:45:01.299 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : schema................................none
+2022-08-26 16:45:01.299 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : threadFactory................................internal
+2022-08-26 16:45:01.299 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : transactionIsolation................................default
+2022-08-26 16:45:01.300 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : username................................"mina"
+2022-08-26 16:45:01.300 DEBUG 313774 --- [main] com.zaxxer.hikari.HikariConfig           : validationTimeout................................5000
+2022-08-26 16:45:01.301  INFO 313774 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-08-26 16:45:01.687  INFO 313774 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-08-26 16:45:02.093 DEBUG 313774 --- [main] c.e.s.service.MyEmailService             : Adding Security provider *BouncyCastleProvider*
+2022-08-26 16:45:02.554 DEBUG 313774 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-08-26 16:45:02.641 DEBUG 313774 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 15 mappings in 'requestMappingHandlerMapping'
+2022-08-26 16:45:02.671 DEBUG 313774 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2022-08-26 16:45:02.717 DEBUG 313774 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-08-26 16:45:03.030  INFO 313774 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoint(s) beneath base path '/actuator'
+2022-08-26 16:45:03.082  INFO 313774 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-08-26 16:45:03.102  INFO 313774 --- [main] c.e.s.SpringbootProjectApplication       : Started SpringbootProjectApplication in 4.67 seconds (JVM running for 5.129)
+2022-08-26 16:47:14.580  INFO 313774 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-08-26 16:47:14.599  INFO 313774 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-08-26 21:43:19.635  INFO 315382 --- [main] c.e.s.SpringbootProjectApplication       : Starting SpringbootProjectApplication using Java 11.0.16 on mina-server with PID 315382 (/home/mina/Desktop/spring-bootProject/target/classes started by mina in /home/mina/Desktop/spring-bootProject)
+2022-08-26 21:43:19.638 DEBUG 315382 --- [main] c.e.s.SpringbootProjectApplication       : Running with Spring Boot v2.7.1, Spring v5.3.21
+2022-08-26 21:43:19.639  INFO 315382 --- [main] c.e.s.SpringbootProjectApplication       : No active profile set, falling back to 1 default profile: "default"
+2022-08-26 21:43:21.443  INFO 315382 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-08-26 21:43:21.454  INFO 315382 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-08-26 21:43:21.454  INFO 315382 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.64]
+2022-08-26 21:43:21.587  INFO 315382 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-08-26 21:43:21.587  INFO 315382 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1889 ms
+2022-08-26 21:43:21.830 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : HikariPool-1 - configuration:
+2022-08-26 21:43:21.834 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : allowPoolSuspension................................false
+2022-08-26 21:43:21.835 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : autoCommit................................true
+2022-08-26 21:43:21.835 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : catalog................................none
+2022-08-26 21:43:21.835 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : connectionInitSql................................none
+2022-08-26 21:43:21.835 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : connectionTestQuery................................none
+2022-08-26 21:43:21.836 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : connectionTimeout................................30000
+2022-08-26 21:43:21.836 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : dataSource................................none
+2022-08-26 21:43:21.836 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : dataSourceClassName................................none
+2022-08-26 21:43:21.836 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : dataSourceJNDI................................none
+2022-08-26 21:43:21.837 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : dataSourceProperties................................{password=<masked>}
+2022-08-26 21:43:21.837 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : driverClassName................................none
+2022-08-26 21:43:21.837 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : exceptionOverrideClassName................................none
+2022-08-26 21:43:21.837 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : healthCheckProperties................................{}
+2022-08-26 21:43:21.838 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : healthCheckRegistry................................none
+2022-08-26 21:43:21.838 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : idleTimeout................................600000
+2022-08-26 21:43:21.838 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : initializationFailTimeout................................1
+2022-08-26 21:43:21.838 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : isolateInternalQueries................................false
+2022-08-26 21:43:21.839 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : jdbcUrl................................jdbc:mysql://localhost:3306/myapp?profileSQL=true
+2022-08-26 21:43:21.839 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : keepaliveTime................................0
+2022-08-26 21:43:21.839 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : leakDetectionThreshold................................0
+2022-08-26 21:43:21.839 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : maxLifetime................................1800000
+2022-08-26 21:43:21.839 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : maximumPoolSize................................10
+2022-08-26 21:43:21.840 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : metricRegistry................................none
+2022-08-26 21:43:21.840 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : metricsTrackerFactory................................none
+2022-08-26 21:43:21.840 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : minimumIdle................................10
+2022-08-26 21:43:21.840 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : password................................<masked>
+2022-08-26 21:43:21.840 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : poolName................................"HikariPool-1"
+2022-08-26 21:43:21.840 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : readOnly................................false
+2022-08-26 21:43:21.841 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : registerMbeans................................false
+2022-08-26 21:43:21.841 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : scheduledExecutor................................none
+2022-08-26 21:43:21.841 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : schema................................none
+2022-08-26 21:43:21.841 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : threadFactory................................internal
+2022-08-26 21:43:21.841 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : transactionIsolation................................default
+2022-08-26 21:43:21.841 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : username................................"mina"
+2022-08-26 21:43:21.842 DEBUG 315382 --- [main] com.zaxxer.hikari.HikariConfig           : validationTimeout................................5000
+2022-08-26 21:43:21.843  INFO 315382 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-08-26 21:43:22.262  INFO 315382 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-08-26 21:43:22.723 DEBUG 315382 --- [main] c.e.s.service.MyEmailService             : Adding Security provider *BouncyCastleProvider*
+2022-08-26 21:43:23.286 DEBUG 315382 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-08-26 21:43:23.408 DEBUG 315382 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 15 mappings in 'requestMappingHandlerMapping'
+2022-08-26 21:43:23.449 DEBUG 315382 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2022-08-26 21:43:23.486 DEBUG 315382 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-08-26 21:43:23.785  INFO 315382 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoint(s) beneath base path '/actuator'
+2022-08-26 21:43:23.836  INFO 315382 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-08-26 21:43:23.858  INFO 315382 --- [main] c.e.s.SpringbootProjectApplication       : Started SpringbootProjectApplication in 4.771 seconds (JVM running for 5.191)
+2022-08-26 21:43:24.105  INFO 315382 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-08-26 21:43:24.118  INFO 315382 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
