@@ -17,12 +17,7 @@ public class MyRepoService {
 
     public String getAllItems() {
         int size = myTestRepository.getAllItems();
-
-        log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-
-        log.debug("some string .. {} and {}", size, myTestRepository.toString());
-
-
+//        log.debug("some string .. {} and {}", size, myTestRepository.toString());
         return "table size = " + size;
     }
 

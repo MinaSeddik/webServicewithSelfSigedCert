@@ -1,6 +1,7 @@
 package com.example.springbootproject.controller;
 
 
+import io.micrometer.core.annotation.Timed;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +10,7 @@ import javax.ws.rs.container.Suspended;
 import java.util.concurrent.*;
 
 @RestController
+@Timed
 public class MyAsyncController {
 
     ExecutorService executor = Executors.newFixedThreadPool(10);

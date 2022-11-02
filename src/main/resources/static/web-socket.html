@@ -1,0 +1,33 @@
+<html>
+
+<script src= "https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<script src= "https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src= "js/web-socket.js"></script>
+
+
+<body>
+
+<h1> Web Sockets using sockjs-client</h1>
+
+<div>
+
+    <button id="connect" onclick="connect();">Connect</button>
+    <button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
+
+
+
+</div>
+
+<br />
+
+<div id="conversationDiv">
+    <input type="text" id="text" placeholder="Write a message..."/>
+    <button id="sendMessage" onclick="sendMessage();">Send</button>
+    <p id="response"></p>
+</div>
+
+
+</body>
+
+
+</html>

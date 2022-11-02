@@ -16,17 +16,12 @@ public class RestTemplateConfig {
 
     @Bean
     public HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory() {
-
-
-
         PoolingHttpClientConnectionManager poolingConnectionManager = new PoolingHttpClientConnectionManager();
 
         poolingConnectionManager.setMaxTotal(20);
         poolingConnectionManager.setDefaultMaxPerRoute(5);
 
         CloseableHttpClient client = HttpClientBuilder.create().setConnectionManager(poolingConnectionManager).build();
-
-
 
         HttpComponentsClientHttpRequestFactory clientHttpRequestFactory =
                 new HttpComponentsClientHttpRequestFactory(client);
