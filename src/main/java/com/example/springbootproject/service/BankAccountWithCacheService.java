@@ -1,7 +1,7 @@
 package com.example.springbootproject.service;
 
 import com.example.springbootproject.model.BankAccount;
-import com.example.springbootproject.repository.BankAccountWithCacheRepository;
+import com.example.springbootproject.repository.impl.BankAccountWithCacheRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

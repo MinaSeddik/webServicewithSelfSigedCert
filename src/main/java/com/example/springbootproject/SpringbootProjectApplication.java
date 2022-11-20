@@ -11,9 +11,15 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.config.EnableIntegration;
 
+//@SpringBootApplication(exclude = {
+//		org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
+//		org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class}
+//)
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 @Slf4j
 public class SpringbootProjectApplication implements CommandLineRunner {
+
+//	–spring.config.location=file://{path to file}.
 
 	public static void main(String[] args) {
 		System.setProperty("spring.devtools.restart.enabled", "false");

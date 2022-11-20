@@ -1,0 +1,23 @@
+# Defines the base entity
+dn: dc=springframework,dc=org
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: springframework
+
+# Defines a group entity
+dn: ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+# Defines a user
+dn: uid=peter,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Peter
+sn: Peter
+uid: peter
+userPassword: 12345

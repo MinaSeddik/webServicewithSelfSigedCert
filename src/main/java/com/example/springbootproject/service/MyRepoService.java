@@ -1,12 +1,18 @@
 package com.example.springbootproject.service;
 
 
-import com.example.springbootproject.repository.MyTestRepository;
+import com.example.springbootproject.repository.impl.MyTestRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -15,10 +21,19 @@ public class MyRepoService {
     @Autowired
     public MyTestRepository myTestRepository;
 
-    public String getAllItems() {
+    public Map<String, String> getAllItems() {
         int size = myTestRepository.getAllItems();
-//        log.debug("some string .. {} and {}", size, myTestRepository.toString());
-        return "table size = " + size;
+
+        Map<String, String> map = new HashMap();
+        map.put("table size", Integer.toString(size));
+
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        if(!Objects.isNull(securityContext)){
+            String username = securityContext.getAuthentication().getName();
+            map.put("user_for service layer", username);
+        }
+
+        return map;
     }
 
     @Transactional

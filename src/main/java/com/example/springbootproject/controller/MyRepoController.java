@@ -6,12 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.codec.ServerSentEvent;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.QueryParam;
-import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 @RestController
@@ -23,15 +24,58 @@ public class MyRepoController {
 
     @Timed(value = "my-app.myrepo.timed")
     @RequestMapping(value = "/repo")
-    public String getRepo() {
+    public Map<String, String> getRepo(Authentication authentication) {
 
         log.info("this is info log");
         log.trace("this is trace log");
         log.debug("this is debug log");
 
 
-        String str = myRepoService.getAllItems();
-        return str;
+        Map<String, String> data = myRepoService.getAllItems();
+
+//        SecurityContext context = SecurityContextHolder.getContext();
+//        Authentication authentication = context.getAuthentication();
+        if (Objects.nonNull(authentication)) {
+            data.put("username", authentication.getName());
+            data.put("authorities", authentication.getAuthorities().toString());
+        }
+
+        return data;
+    }
+
+    @DeleteMapping(value = "/repo")
+    public Map<String, String> deleteRepo(Authentication authentication) {
+
+        log.info("Inside delete repo ...");
+
+        Map<String, String> data = new HashMap<>();
+        data.put("repo", "repo-name");
+        data.put("status", "deleted");
+
+        if (Objects.nonNull(authentication)) {
+            data.put("username", authentication.getName());
+            data.put("authorities", authentication.getAuthorities().toString());
+        }
+
+        return data;
+    }
+
+    @PostMapping(value = "/repo")
+    @CrossOrigin("http://localhost:8080")
+    public Map<String, String> postRepo(Authentication authentication) {
+
+        log.info("Inside post repo ...");
+
+        Map<String, String> data = new HashMap<>();
+        data.put("repo", "repo-name");
+        data.put("status", "deleted");
+
+        if (Objects.nonNull(authentication)) {
+            data.put("username", authentication.getName());
+            data.put("authorities", authentication.getAuthorities().toString());
+        }
+
+        return data;
     }
 
     @RequestMapping(value = "/auth")
@@ -47,11 +91,11 @@ public class MyRepoController {
 
     @Timed(value = "my-app.myrepo.search.timed")
     @RequestMapping(value = "/repo/search")
-    public String searchRepo(@QueryParam("q") String value) {
+    public Map<String, String> searchRepo(@QueryParam("q") String value) {
 
         log.info("Received Search with query-param = {}", value);
-        String str = myRepoService.getAllItems();
-        return str;
+        Map<String, String> data = myRepoService.getAllItems();
+        return data;
     }
 
     @RequestMapping(value = "/trans")

