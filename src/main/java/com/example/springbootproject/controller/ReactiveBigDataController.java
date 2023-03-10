@@ -1,6 +1,6 @@
 package com.example.springbootproject.controller;
 
-import com.example.springbootproject.model.BigRecord;
+import com.example.springbootproject.domain.BigRecord;
 import com.example.springbootproject.service.ReactiveBigDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

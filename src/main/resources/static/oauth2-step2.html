@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<form action="https://oauth2.googleapis.com/token" method="POST">
+
+  <div class="container">
+    <label for="client_id"><b>client_id</b></label>
+    <input type="text" name="client_id" value="1052945576635-vv55b7jprva8ss2vs02lgdj0d4dh70u6.apps.googleusercontent.com" required>
+    <br>
+
+    <label for="client_secret"><b>client_secret</b></label>
+    <input type="text" name="client_secret" value="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" required>
+    <br>
+
+    <label for="code"><b>code</b></label>
+    <input type="text" placeholder="Enter code received from step-1" name="code" required>
+    <br>
+
+    <label for="grant_type"><b>grant_type</b></label>
+    <input type="text" name="grant_type" value="authorization_code" required>
+    <br>
+
+    <label for="redirect_uri"><b>redirect_uri</b></label>
+    <input type="text" name="redirect_uri" value="https://www.getpostman.com/oauth2/callback" required>
+    <br>
+
+
+    <button type="submit">Sign up with Google (OAuth 2.0) Get Access Token</button>
+
+  </div>
+
+</form>
+
+
+</body>
+</html>

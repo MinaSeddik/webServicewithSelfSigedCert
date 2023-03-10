@@ -67,6 +67,23 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+    public void configure_oauth2_client_config(HttpSecurity http) throws Exception {
+
+        http.csrf().disable();
+        http.formLogin().disable();
+        http.httpBasic().disable();
+
+//        http.oauth2Login();
+
+//        http.oauth2Login(c -> {
+//            c.clientRegistrationRepository(clientRepository());
+//        });
+
+        http.authorizeRequests()
+                .anyRequest()
+                .authenticated();
+    }
+
     /*
     Adds the AuthenticationManager to the Spring context so that we can auto-wire it
     from the filter class

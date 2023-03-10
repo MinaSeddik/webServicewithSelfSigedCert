@@ -1,7 +1,7 @@
 package com.example.springbootproject.repository.impl;
 
 
-import com.example.springbootproject.model.BankAccount;
+import com.example.springbootproject.domain.BankAccount;
 import com.example.springbootproject.repository.rowmapper.BankAccountRowMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

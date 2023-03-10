@@ -1,6 +1,6 @@
 package com.example.springbootproject.repository.impl;
 
-import com.example.springbootproject.model.Token;
+import com.example.springbootproject.domain.Token;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;

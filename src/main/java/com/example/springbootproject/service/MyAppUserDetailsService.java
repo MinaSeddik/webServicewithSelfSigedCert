@@ -1,12 +1,12 @@
 package com.example.springbootproject.service;
 
-import com.example.springbootproject.domain.AuthorityEntity;
-import com.example.springbootproject.domain.UserEntity;
+import com.example.springbootproject.entity.AuthorityEntity;
+import com.example.springbootproject.entity.UserEntity;
 import com.example.springbootproject.exception.InValidCredentialsException;
-import com.example.springbootproject.model.AppUser;
-import com.example.springbootproject.model.Authority;
-import com.example.springbootproject.model.EncryptionAlgorithm;
-import com.example.springbootproject.model.SecurityUserDetails;
+import com.example.springbootproject.domain.AppUser;
+import com.example.springbootproject.domain.Authority;
+import com.example.springbootproject.domain.EncryptionAlgorithm;
+import com.example.springbootproject.domain.SecurityUserDetails;
 import com.example.springbootproject.repository.impl.AuthorityRepository;
 import com.example.springbootproject.repository.impl.OtpRecoveryRepository;
 import com.example.springbootproject.repository.impl.UserRepository;
@@ -22,7 +22,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;

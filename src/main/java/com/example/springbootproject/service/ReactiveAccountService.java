@@ -1,9 +1,9 @@
 package com.example.springbootproject.service;
 
 import com.example.springbootproject.exception.InvalidUserException;
-import com.example.springbootproject.model.AccountRequest;
-import com.example.springbootproject.model.AuditRecord;
-import com.example.springbootproject.model.BankAccount;
+import com.example.springbootproject.domain.AccountRequest;
+import com.example.springbootproject.domain.AuditRecord;
+import com.example.springbootproject.domain.BankAccount;
 import com.example.springbootproject.repository.impl.ReactiveAccountRepository;
 import com.example.springbootproject.repository.impl.ReactiveAuditRepository;
 import lombok.extern.slf4j.Slf4j;

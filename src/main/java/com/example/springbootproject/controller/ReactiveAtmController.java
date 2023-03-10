@@ -1,7 +1,7 @@
 package com.example.springbootproject.controller;
 
 
-import com.example.springbootproject.model.BankAccount;
+import com.example.springbootproject.domain.BankAccount;
 import com.example.springbootproject.service.ReactiveAtmService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

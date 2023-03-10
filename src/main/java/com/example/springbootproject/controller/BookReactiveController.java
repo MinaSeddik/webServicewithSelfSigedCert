@@ -1,6 +1,6 @@
 package com.example.springbootproject.controller;
 
-import com.example.springbootproject.model.Book;
+import com.example.springbootproject.domain.Book;
 import com.example.springbootproject.service.BookReactiveService;
 import io.micrometer.core.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;

@@ -1,12 +1,14 @@
 package com.example.springbootproject.service;
 
-import com.example.springbootproject.model.BankAccount;
+import com.example.springbootproject.domain.BankAccount;
+import com.example.springbootproject.domain.Invoice;
 import com.example.springbootproject.repository.impl.BankAccountWithCacheRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 @Slf4j
@@ -24,6 +26,11 @@ public class BankAccountWithCacheService {
     public BankAccount getAccountById(int id) {
 
         log.info("getAccountById Service called");
+
+
+        Predicate<Invoice> isOverDue = invoice -> bankAccountWithCacheRepository.getAccountById(invoice.getId()).getId() == 0;
+
+
         return bankAccountWithCacheRepository.getAccountById(id);
     }
 

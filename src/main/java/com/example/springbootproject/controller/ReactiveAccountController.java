@@ -1,6 +1,6 @@
 package com.example.springbootproject.controller;
 
-import com.example.springbootproject.model.AccountRequest;
+import com.example.springbootproject.domain.AccountRequest;
 import com.example.springbootproject.service.ReactiveAccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

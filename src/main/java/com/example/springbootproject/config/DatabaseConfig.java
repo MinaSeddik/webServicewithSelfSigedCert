@@ -13,7 +13,9 @@ import javax.sql.DataSource;
 
 @Configuration
 @ConfigurationProperties("app.datasource")
+
 //@EnableTransactionManagement
+// Adding @EnableTransactionManagement annotation creates a PlatformTransactionManager for you
 public class DatabaseConfig extends HikariConfig {
 
     @Bean

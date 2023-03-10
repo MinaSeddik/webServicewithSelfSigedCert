@@ -1,6 +1,6 @@
 package com.example.springbootproject.repository.rowmapper;
 
-import com.example.springbootproject.model.BankAccount;
+import com.example.springbootproject.domain.BankAccount;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

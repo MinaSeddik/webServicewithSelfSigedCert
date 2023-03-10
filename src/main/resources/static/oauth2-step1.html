@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<form action="https://accounts.google.com/o/oauth2/v2/auth" method="POST">
+
+  <div class="container">
+    <label for="client_id"><b>client_id</b></label>
+    <input type="text" name="client_id" value="1052945576635-vv55b7jprva8ss2vs02lgdj0d4dh70u6.apps.googleusercontent.com" required>
+    <br>
+
+    <label for="redirect_uri"><b>redirect_uri</b></label>
+    <input type="text" name="redirect_uri" value="https://www.getpostman.com/oauth2/callback" required>
+    <br>
+
+    <label for="response_type"><b>response_type</b></label>
+    <input type="text" name="response_type" value="code" required>
+    <br>
+
+    <label for="scope"><b>scope</b></label>
+    <input type="text" name="scope" value="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid" required>
+    <br>
+
+    <label for="access_type"><b>access_type</b></label>
+    <input type="text" name="access_type" value="offline" required>
+    To get the Refresh token
+    <br>
+
+    <label for="state"><b>state</b></label>
+    <input type="text" name="state" value="RANDOM_STRING_FOR_CSRF" required>
+    <br>
+
+    <label for="prompt"><b>prompt</b></label>
+    <input type="text" name="prompt" value="consent" required>
+    To get the Refresh token
+    <br>
+
+    <button type="submit">Sign up with Google (OAuth 2.0)</button>
+
+  </div>
+
+</form>
+
+
+<div>
+  <p>
+    <br>
+    Http Response code: 302
+    <br>
+    Location: https://www.postman.com/oauth2/callback?state=RANDOM_STRING_FOR_CSRF&code=4/0AfgeXvvK6swOHbINIVD2ND0AEEowukMzf6s0iKOPV-M1uXbnGuerHdT_qKdRIGsV8vhleA&scope=email+profile+openid+https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&authuser=3&prompt=none
+    <br>
+    Parameters:
+    <br>
+    state=RANDOM_STRING_FOR_CSRF
+    <br>
+    code=4/0AfgeXvvK6swOHbINIVD2ND0AEEowukMzf6s0iKOPV-M1uXbnGuerHdT_qKdRIGsV8vhleA
+    <br>
+    scope=email+profile+openid+https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email
+    <br>
+    authuser=
+    <br>
+    prompt=consent
+
+  </p>
+</div>
+
+
+</body>
+</html>

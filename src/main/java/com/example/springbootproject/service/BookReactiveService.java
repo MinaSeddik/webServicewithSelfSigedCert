@@ -1,6 +1,6 @@
 package com.example.springbootproject.service;
 
-import com.example.springbootproject.model.Book;
+import com.example.springbootproject.domain.Book;
 import com.example.springbootproject.repository.impl.ReactiveSpringDataBookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

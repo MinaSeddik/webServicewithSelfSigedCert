@@ -1,11 +1,11 @@
 package com.example.springbootproject.repository.rowmapper;
 
-import com.example.springbootproject.domain.UserEntity;
-import com.example.springbootproject.model.BankAccount;
+import com.example.springbootproject.entity.UserEntity;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.function.Predicate;
 
 public class UserEntityRowMapper implements RowMapper<UserEntity> {
 
@@ -17,6 +17,9 @@ public class UserEntityRowMapper implements RowMapper<UserEntity> {
         String algorithm = resultSet.getString("algorithm");
         boolean mfaEnabled = resultSet.getBoolean("mfa_enabled");
         String optSecretKey = resultSet.getString("otp_secret_key");
+
+//        UserEntity e = UserEntityFactory.build(resultSet);
+
 
 
         return UserEntity.builder()

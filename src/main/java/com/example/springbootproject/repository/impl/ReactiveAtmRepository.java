@@ -1,7 +1,7 @@
 package com.example.springbootproject.repository.impl;
 
 
-import com.example.springbootproject.model.BankAccount;
+import com.example.springbootproject.domain.BankAccount;
 import io.r2dbc.client.R2dbc;
 import io.r2dbc.spi.ConnectionFactory;
 import lombok.extern.slf4j.Slf4j;

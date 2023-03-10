@@ -1,6 +1,6 @@
 package com.example.springbootproject.repository.rowmapper;
 
-import com.example.springbootproject.domain.AuthorityEntity;
+import com.example.springbootproject.entity.AuthorityEntity;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

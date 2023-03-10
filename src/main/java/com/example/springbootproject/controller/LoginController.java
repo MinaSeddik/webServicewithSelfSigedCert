@@ -1,7 +1,7 @@
 package com.example.springbootproject.controller;
 
 import com.example.springbootproject.dto.RestResponse;
-import com.example.springbootproject.model.Credential;
+import com.example.springbootproject.domain.Credential;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +26,7 @@ import java.time.Instant;
 @RestController
 @Slf4j
 public class LoginController {
+
     @Autowired
     public AuthenticationManager authenticationManager;
 

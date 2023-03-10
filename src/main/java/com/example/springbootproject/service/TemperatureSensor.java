@@ -1,8 +1,7 @@
 package com.example.springbootproject.service;
 
-import com.example.springbootproject.model.Temperature;
+import com.example.springbootproject.domain.Temperature;
 import io.reactivex.Observable;
-import org.reactivestreams.Publisher;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 

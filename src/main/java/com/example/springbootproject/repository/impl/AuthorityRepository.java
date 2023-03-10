@@ -1,6 +1,6 @@
 package com.example.springbootproject.repository.impl;
 
-import com.example.springbootproject.domain.AuthorityEntity;
+import com.example.springbootproject.entity.AuthorityEntity;
 import com.example.springbootproject.repository.rowmapper.AuthorityEntityRowMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,8 @@
 package com.example.springbootproject.service;
 
 import com.example.springbootproject.exception.InValidCredentialsException;
-import com.example.springbootproject.model.SecurityUserDetails;
+import com.example.springbootproject.domain.SecurityUserDetails;
 import com.example.springbootproject.security.OtpAuthentication;
-import com.example.springbootproject.security.UsernamePasswordAuthentication;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

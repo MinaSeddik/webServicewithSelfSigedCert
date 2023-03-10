@@ -1,8 +1,7 @@
 package com.example.springbootproject.filter;
 
-import com.example.springbootproject.dto.RestErrorResponse;
 import com.example.springbootproject.exception.InValidCredentialsException;
-import com.example.springbootproject.model.SecurityUserDetails;
+import com.example.springbootproject.domain.SecurityUserDetails;
 import com.example.springbootproject.security.OtpAuthentication;
 import com.example.springbootproject.security.UsernamePasswordAuthentication;
 import com.example.springbootproject.util.JwtManager;
@@ -16,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.web.filter.OncePerRequestFilter;
 

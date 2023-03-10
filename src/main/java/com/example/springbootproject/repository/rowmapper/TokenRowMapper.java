@@ -1,7 +1,6 @@
 package com.example.springbootproject.repository.rowmapper;
 
-import com.example.springbootproject.domain.UserEntity;
-import com.example.springbootproject.model.Token;
+import com.example.springbootproject.domain.Token;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

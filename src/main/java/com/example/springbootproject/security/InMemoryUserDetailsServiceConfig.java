@@ -1,6 +1,6 @@
 package com.example.springbootproject.security;
 
-import com.example.springbootproject.model.InMemoryUser;
+import com.example.springbootproject.domain.InMemoryUser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;

@@ -1,6 +1,6 @@
 package com.example.springbootproject.repository.impl;
 
-import com.example.springbootproject.model.Token;
+import com.example.springbootproject.domain.Token;
 import com.example.springbootproject.repository.rowmapper.TokenRowMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
