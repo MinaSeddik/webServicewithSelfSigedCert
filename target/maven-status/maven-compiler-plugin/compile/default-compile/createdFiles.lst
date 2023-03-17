@@ -4,6 +4,7 @@ com/example/springbootproject/config/WebSecurityConfig.class
 com/example/springbootproject/service/ReactiveAtmService.class
 com/example/springbootproject/service/RobustWithCircuitBreakerService$1.class
 com/example/springbootproject/repository/impl/ReactiveAuditRepository.class
+com/example/springbootproject/controller/EnvironmentController.class
 com/example/springbootproject/security/JdbcUserDetailsManagerConfig.class
 com/example/springbootproject/controller/MainController.class
 com/example/springbootproject/repository/impl/OtpRecoveryRepository$1.class
@@ -155,6 +156,7 @@ com/example/springbootproject/controller/BookReactiveController.class
 com/example/springbootproject/service/ReactiveAccountService.class
 com/example/springbootproject/oauth2/HttpCookieOAuth2AuthorizationRequestRepository.class
 com/example/springbootproject/config/RestOAuth2WebSecurityConfig.class
+com/example/springbootproject/db/migration/common/V1_4__InsertRandomUsers.class
 com/example/springbootproject/controller/ReactiveAtmController.class
 com/example/springbootproject/domain/OrderType.class
 com/example/springbootproject/controller/ReactiveTemperatureEmitterController.class

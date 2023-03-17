@@ -26,7 +26,7 @@ public class RestOAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().disable();
         http.httpBasic().disable();
 
-        http.oauth2Client();
+//        http.oauth2Client();
 
 
         http.authorizeRequests()
@@ -35,6 +35,14 @@ public class RestOAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .authenticated();
     }
 
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+
+    /*
     @Bean
     public OAuth2AuthorizedClientService authorizedClientService() {
 
@@ -47,18 +55,15 @@ public class RestOAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        return new InMemoryClientRegistrationRepository(clientRegistration() );
         return null;
     }
-
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+*/
 
     /*
           By default, Spring OAuth2 uses HttpSessionOAuth2AuthorizationRequestRepository to save
           the authorization request. But, since our service is stateless, we can't save it in
           the session. We'll save the request in a Base64 encoded cookie instead.
         */
+
+    /*
     @Bean
     public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
         return new HttpCookieOAuth2AuthorizationRequestRepository();
@@ -69,4 +74,5 @@ public class RestOAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         return new HttpSessionOAuth2AuthorizationRequestRepository();
     }
+    */
 }

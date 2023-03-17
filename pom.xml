@@ -92,7 +92,6 @@
             <artifactId>unboundid-ldapsdk</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -104,6 +103,7 @@
             <artifactId>jackson-jaxrs</artifactId>
             <version>1.9.13</version>
         </dependency>
+
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-xc</artifactId>
@@ -117,7 +117,6 @@
             <version>2.0-m12</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
@@ -130,18 +129,21 @@
             <version>4.0.3</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.30</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -170,7 +172,6 @@
             <version>2.5.6</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/net.markenwerk/utils-mail-smime -->
         <dependency>
             <groupId>net.markenwerk</groupId>
             <artifactId>utils-mail-smime</artifactId>
@@ -230,21 +231,18 @@
             <version>5.5.15</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework.retry/spring-retry -->
         <dependency>
             <groupId>org.springframework.retry</groupId>
             <artifactId>spring-retry</artifactId>
             <version>1.3.3</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
             <version>5.3.23</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava -->
         <dependency>
             <groupId>io.reactivex.rxjava2</groupId>
             <artifactId>rxjava</artifactId>
@@ -257,21 +255,18 @@
         </dependency>
 
 
-        <!-- https://mvnrepository.com/artifact/io.projectreactor.addons/reactor-extra -->
         <dependency>
             <groupId>io.projectreactor.addons</groupId>
             <artifactId>reactor-extra</artifactId>
             <version>3.4.8</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-r2dbc -->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-r2dbc</artifactId>
             <version>1.5.5</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/dev.miku/r2dbc-mysql -->
         <dependency>
             <groupId>dev.miku</groupId>
             <artifactId>r2dbc-mysql</artifactId>
@@ -350,6 +345,16 @@
         <!--            <artifactId>spring-security-oauth2-autoconfigure</artifactId>-->
         <!--            <version>2.6.8</version>-->
         <!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
+        </dependency>
 
     </dependencies>
 
@@ -444,9 +449,87 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>9.15.1</version>
+<!--                <version>8.5.11</version>-->
+<!--                <configuration>-->
+<!--&lt;!&ndash;                    <driver>com.mysql.jdbc.Driver</driver>&ndash;&gt;-->
+<!--                    <configFiles>/home/mina/Desktop/spring-bootProject/src/main/resources/flyway-local.conf</configFiles>-->
+<!--                    <url>jdbc:mysql://localhost:3306/test_flyway2222</url>-->
+<!--                    <user>minaw</user>-->
+<!--                    <password>#Mina_1234$</password>-->
+<!--                    <locations>classpath:db/migration</locations>-->
+<!--                </configuration>-->
+
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>org.flywaydb</groupId>-->
+<!--                        <artifactId>flyway-core</artifactId>-->
+<!--                        <version>8.5.13</version>-->
+<!--                    </dependency>-->
+
+<!--                    <dependency>-->
+<!--                        <groupId>org.flywaydb</groupId>-->
+<!--                        <artifactId>flyway-mysql</artifactId>-->
+<!--                        <version>8.5.13</version>-->
+<!--                    </dependency>-->
+
+<!--                </dependencies>-->
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-help-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>show-profiles</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>active-profiles</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
         </plugins>
+
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>src/main/resources</directory>-->
+<!--                <filtering>true</filtering>-->
+<!--            </resource>-->
+<!--        </resources>-->
+
     </build>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <flyway.configFiles>flyway-config/flyway-local.conf</flyway.configFiles>
+            </properties>
+
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <flyway.configFiles>flyway-config/flyway-dev.conf</flyway.configFiles>
+            </properties>
+        </profile>
+        <profile>
+            <id>qa</id>
+            <properties>
+                <flyway.configFiles>flyway-config/flyway-qa.conf</flyway.configFiles>
+            </properties>
+        </profile>
+    </profiles>
+
 
 </project>
 
