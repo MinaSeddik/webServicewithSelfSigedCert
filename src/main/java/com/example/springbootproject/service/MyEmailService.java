@@ -85,13 +85,34 @@ public class MyEmailService implements InitializingBean {
 
     public void sendSimpleHtmlMessage(String to, String subject, String htmlMsg) {
 
+
+        /*
+        Validate to and from against a restricted email Regex to avoid SMTP injection (should not contain new line)
+        Validate htmlMsg NOT to contain "." in a single line as it will be used to end the email body
+        lines containing just a single dot should be disallowed.
+         */
         log.info("Sending html email To: {}", to);
         log.debug("Sending html email From: {}", from);
         log.debug("Sending html email Subject: {}", subject);
         log.debug("Sending html email Message: {}", htmlMsg);
 
         try {
+/*
+            MIME-Version: 1.0
+            From: test@example.org
+            Content-Type: text/html; charset=us-ascii
+            Content-Transfer-Encoding: 7bit
+            Subject: XSS test
 
+            <html>
+            <body>
+            data goes here
+            <img src=``onerror=alert(1)>
+            </body>
+            </html>
+            .
+
+   */
             MimeMessage mimeMessage = emailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
 

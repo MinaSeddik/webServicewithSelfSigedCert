@@ -1,6 +1,7 @@
 package com.example.springbootproject.repository.impl;
 
 import com.example.springbootproject.entity.UserEntity;
+import com.example.springbootproject.entity.UserTableColumn;
 import com.example.springbootproject.repository.rowmapper.UserEntityRowMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,21 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 @Slf4j
 public class UserRepository {
+
+
+    public final static EnumSet<UserTableColumn> USER_COLUMNS_ENUMS = EnumSet.allOf(UserTableColumn.class);
+    public final static Set<String> USER_COLUMNS = Collections.unmodifiableSet(
+            new HashSet<>(Arrays.asList(
+                    "ID",
+                    "NAME",
+                    "PWD",
+                    "STATUS"
+            )));
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -77,4 +87,32 @@ public class UserRepository {
         return keyHolder.getKey().intValue();
     }
 
+
+    public List<UserEntity> listUsers(String orderBy, boolean sortOrder) {
+        log.info("List all users by username");
+
+        String sql = "select * from user";
+
+        String sortDir = sortOrder ? "ASC" : "DESC";
+//        String sortDir = (sortDirection==0? " ASC " : " DESC ");
+
+        if (USER_COLUMNS.contains(orderBy)) {
+            sql = sql + " order by " + orderBy + " " + sortDir;
+        } else {
+            throw new IllegalArgumentException("Nice try!");
+        }
+
+//        OR
+        UserTableColumn orderByEnum = UserTableColumn.valueOf(orderBy);
+        if (USER_COLUMNS_ENUMS.contains(orderByEnum)) {
+            sql = sql + " order by " + orderBy + " " + sortDir;
+        } else {
+            throw new IllegalArgumentException("Nice try!");
+        }
+
+
+        List<UserEntity> userEntityList = jdbcTemplate.query(sql, new UserEntityRowMapper());
+
+        return userEntityList;
+    }
 }

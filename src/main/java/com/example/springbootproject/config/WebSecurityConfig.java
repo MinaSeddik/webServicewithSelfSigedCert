@@ -147,6 +147,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             CorsConfigurationSource source = request -> {
                 CorsConfiguration config = new CorsConfiguration();
                 config.setAllowedOrigins(List.of("example.com", "example.org"));
+//                config.setAllowedOriginPatterns(List.of("example.com", "example.org"));
 
                 /* you have to specify at least which are the origins
                 and the methods. If you only specify the origins, your application won’t allow the

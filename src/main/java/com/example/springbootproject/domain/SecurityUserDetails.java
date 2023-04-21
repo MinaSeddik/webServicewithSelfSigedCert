@@ -5,6 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 // User Decorator class
@@ -66,5 +67,24 @@ public class SecurityUserDetails implements UserDetails {
 
     public int getUserId(){
         return user.getId();
+    }
+
+    public int getFailedAttempts(){
+        // get it from the database
+        return 0;
+    }
+
+    public Date getLockedTime(){
+        // get it from the database
+        return new Date();
+    }
+
+    public void setAccountNonLocked(boolean b) {
+    }
+
+    public void setFailedAttempts(int i) {
+    }
+
+    public void setLockedTime(Object o) {
     }
 }

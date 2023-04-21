@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.time.Instant;
 
+import static org.springframework.security.authorization.AuthorityAuthorizationManager.hasRole;
+
 @RestController
 @Slf4j
 public class LoginController {
@@ -39,6 +41,8 @@ public class LoginController {
             return ResponseEntity.badRequest()
                     .body(result);
         }
+
+        hasRole("ROLE_VIEWER");
 
         log.info("Welcome to Myapp login ... credential = {}", credential);
         log.info("username: {}, password: {}", credential.getUsername(), credential.getPassword());

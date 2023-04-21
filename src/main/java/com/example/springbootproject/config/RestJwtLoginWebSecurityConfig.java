@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
@@ -86,6 +87,15 @@ public class RestJwtLoginWebSecurityConfig extends WebSecurityConfigurerAdapter 
                 .mvcMatchers("/auth/login", "/auth/refresh", "/signup.html", "/signup", "/qr.html")
                 .permitAll()
                 .anyRequest().authenticated();
+
+        /*
+        always – A session will always be created if one doesn't already exist.
+        ifRequired – A session will be created only if required (default).
+        never – The framework will never create a session itself, but it will use one if it already exists.
+        stateless – No session will be created or used by Spring Security.
+        */
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 
         http.addFilterBefore(exceptionHandlerFilter, LogoutFilter.class)

@@ -19,16 +19,21 @@ import org.springframework.http.converter.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.SessionTrackingMode;
+import java.util.HashSet;
 import java.util.List;
 
 @Configuration
 @EnableWebMvc
 @Slf4j
-public class WebMvcConfig implements WebMvcConfigurer {
+public class WebMvcConfig implements WebMvcConfigurer, WebApplicationInitializer {
 
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/META-INF/resources/", "classpath:/resources/",
@@ -93,4 +98,22 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return bean;
     }
 
+
+    // Dont include it any project, this is just form testing and trial
+    // OR in application.properties
+    // server.session.tracking-modes=cookie
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+
+        // server.session.tracking-modes=cookie
+        HashSet<SessionTrackingMode> set = new HashSet<>();
+        set.add(SessionTrackingMode.COOKIE);
+        servletContext.setSessionTrackingModes(set);
+
+//        server.servlet.session.cookie.http-only=true
+//        server.servlet.session.cookie.secure=true
+        servletContext.getSessionCookieConfig().setHttpOnly(true);
+        servletContext.getSessionCookieConfig().setSecure(true);
+
+    }
 }

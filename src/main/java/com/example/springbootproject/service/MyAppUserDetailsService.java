@@ -50,8 +50,8 @@ public class MyAppUserDetailsService implements UserDetailsManager {
     private OtpRecoveryRepository otpRecoveryRepository;
 
     /*
-        The service should throw an exception of type UsernameNotFoundException
-        if the user doesn’t exist.
+        The service should throw an exception to type UsernameNotFoundException
+        if the user does’t exist.
      */
     @Override
     public SecurityUserDetails loadUserByUsername(String username) {

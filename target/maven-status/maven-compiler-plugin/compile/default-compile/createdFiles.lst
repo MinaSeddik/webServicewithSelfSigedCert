@@ -30,6 +30,7 @@ com/example/springbootproject/repository/impl/MyTestRepository$1.class
 com/example/springbootproject/filter/JwtAuthenticationFilter.class
 com/example/springbootproject/domain/BigRecord$BigRecordBuilder.class
 com/example/springbootproject/config/RestSessionLoginWebSecurityConfig.class
+com/example/springbootproject/filter/ExceptionHandlerFilter$1.class
 com/example/springbootproject/controller/MyRestController.class
 com/example/springbootproject/controller/WebSocketController.class
 com/example/springbootproject/actuator/ReactiveServerTimeEndpoint.class
@@ -42,6 +43,7 @@ com/example/springbootproject/actuator/health/PaymentHealthIndicator.class
 com/example/springbootproject/repository/impl/AuthorityRepository$1.class
 com/example/springbootproject/security/CustomAccessDeniedHandler.class
 com/example/springbootproject/service/MyAppAuthenticationProvider.class
+com/example/springbootproject/repository/MysqlCharEscaper.class
 com/example/springbootproject/exception/NoSuchElementFoundException.class
 com/example/springbootproject/repository/impl/MyTestRepository$2.class
 com/example/springbootproject/domain/Authority$AuthorityBuilder.class
@@ -78,6 +80,7 @@ com/example/springbootproject/security/UsernamePasswordAuthentication.class
 com/example/springbootproject/controller/WhoAmIController.class
 com/example/springbootproject/repository/impl/BankAccountWithCacheRepository.class
 com/example/springbootproject/controller/MySftpController.class
+com/example/springbootproject/config/MethodSecurityConfig.class
 com/example/springbootproject/filter/ExceptionHandlerFilter.class
 com/example/springbootproject/repository/impl/AuthorityRepository.class
 com/example/springbootproject/repository/impl/JwtDatabaseBlacklistRepository.class
@@ -87,6 +90,7 @@ com/example/springbootproject/config/RetryConfig.class
 com/example/springbootproject/repository/impl/ImperativeBigDataRepository$2.class
 com/example/springbootproject/domain/Credential.class
 com/example/springbootproject/exception/InValidJwtTokenException.class
+com/example/springbootproject/security/CustomMethodSecurityExpressionRoot.class
 com/example/springbootproject/config/RestJwtLoginWebSecurityConfig.class
 com/example/springbootproject/domain/Authority.class
 com/example/springbootproject/domain/EncryptionAlgorithm.class
@@ -128,9 +132,12 @@ com/example/springbootproject/filter/AuthenticationLoggingFilter.class
 com/example/springbootproject/controller/ReactiveAccountController.class
 com/example/springbootproject/service/MyAppAuthenticationProvider$1.class
 com/example/springbootproject/service/MyAppUserDetailsService.class
+com/example/springbootproject/entity/UserTableColumn.class
+com/example/springbootproject/security/CustomMethodSecurityExpressionHandler.class
 com/example/springbootproject/exception/GlobalExceptionHandler.class
 com/example/springbootproject/service/ReactiveBigDataService.class
 com/example/springbootproject/repository/impl/CustomCsrfTokenRepository.class
+com/example/springbootproject/security/SecurityLogger.class
 com/example/springbootproject/repository/rowmapper/UserEntityRowMapper.class
 com/example/springbootproject/config/OAuth2ClientRegistrationSecurityConfig.class
 com/example/springbootproject/service/MyService.class
@@ -140,6 +147,7 @@ com/example/springbootproject/security/InMemoryUserDetailsService.class
 com/example/springbootproject/config/SftpConfig.class
 com/example/springbootproject/controller/MyRestTemplate.class
 com/example/springbootproject/service/UsernamePasswordAuthenticationProvider.class
+com/example/springbootproject/security/CustomPermissionEvaluator.class
 com/example/springbootproject/security/CustomAuthenticationSuccessHandler.class
 com/example/springbootproject/actuator/model/MyAppCacheInfo$MyAppCacheInfoBuilder.class
 com/example/springbootproject/exception/MissedAuthorizationHeaderException.class

@@ -26,6 +26,10 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     @Autowired
     public ObjectMapper mapper;
 
+    // here you can apply Rate Limit
+    // example
+
+
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)
             throws IOException, ServletException {

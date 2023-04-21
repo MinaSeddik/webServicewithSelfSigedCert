@@ -494,7 +494,29 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>8.2.1</version>
+                <!--            <configuration>-->
+                <!--                <ossindexAnalyzerEnabled>false</ossindexAnalyzerEnabled>-->
+                <!--                <retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>-->
+                <!--                <nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>-->
+                <!--                <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>-->
+                <!--            </configuration>-->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
+
+
+
 
 <!--        <resources>-->
 <!--            <resource>-->
