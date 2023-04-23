@@ -1,9 +1,6 @@
 package com.example.springbootproject.repository.rowmapper;
 
-import com.example.springbootproject.audit.Event;
-import com.example.springbootproject.audit.EventDetail;
-import com.example.springbootproject.audit.EventSource;
-import com.example.springbootproject.audit.EventTime;
+import com.example.springbootproject.audit.*;
 import com.example.springbootproject.audit.event.Action;
 import com.example.springbootproject.entity.AuthorityEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -14,10 +11,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.EnumMap;
+import java.util.EnumSet;
 
 public class EventRowMapper implements RowMapper<Event> {
 
     private final ObjectMapper objectMapper;
+
+//    private EnumSet<Action> actionSet = EnumSet.allOf(Action.class);
+
 
     public EventRowMapper(ObjectMapper mapper) {
         this.objectMapper = mapper;
@@ -41,7 +43,12 @@ public class EventRowMapper implements RowMapper<Event> {
 
         try {
             eventSource = objectMapper.readValue(sourceAsJson, EventSource.class);
-            eventDetail = objectMapper.readValue(detailsAsJson, EventDetail.class);
+
+            EventAction eventAction = objectMapper.readValue(detailsAsJson, actionType.getHandlerClass());
+            eventDetail = EventDetail.builder()
+                    .eventAction(eventAction)
+                    .build();
+
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

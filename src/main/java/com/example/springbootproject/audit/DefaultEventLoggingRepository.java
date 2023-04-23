@@ -35,7 +35,7 @@ public class DefaultEventLoggingRepository implements EventLoggingRepository {
 
         try {
             eventSourceAsJson = mapper.writeValueAsString(event.getEventSource());
-            eventDetailsAsJson = mapper.writeValueAsString(event.getEventDetail());
+            eventDetailsAsJson = mapper.writeValueAsString(event.getEventDetail().getEventAction());
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
