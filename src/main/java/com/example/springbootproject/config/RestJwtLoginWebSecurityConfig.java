@@ -87,6 +87,8 @@ public class RestJwtLoginWebSecurityConfig extends WebSecurityConfigurerAdapter 
                 .mvcMatchers("/auth/login", "/auth/refresh", "/signup.html", "/signup", "/qr.html")
                 .permitAll()
                 .anyRequest().authenticated();
+//                .and()
+//                .anonymous().disable();
 
         /*
         always – A session will always be created if one doesn't already exist.

@@ -42,8 +42,6 @@ public class LoginController {
                     .body(result);
         }
 
-        hasRole("ROLE_VIEWER");
-
         log.info("Welcome to Myapp login ... credential = {}", credential);
         log.info("username: {}, password: {}", credential.getUsername(), credential.getPassword());
 

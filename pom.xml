@@ -453,6 +453,9 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>9.15.1</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
 <!--                <version>8.5.11</version>-->
 <!--                <configuration>-->
 <!--&lt;!&ndash;                    <driver>com.mysql.jdbc.Driver</driver>&ndash;&gt;-->
@@ -498,6 +501,9 @@
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>8.2.1</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
                 <!--            <configuration>-->
                 <!--                <ossindexAnalyzerEnabled>false</ossindexAnalyzerEnabled>-->
                 <!--                <retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>-->
@@ -530,9 +536,9 @@
     <profiles>
         <profile>
             <id>local</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+<!--            <activation>-->
+<!--                <activeByDefault>true</activeByDefault>-->
+<!--            </activation>-->
             <properties>
                 <flyway.configFiles>flyway-config/flyway-local.conf</flyway.configFiles>
             </properties>

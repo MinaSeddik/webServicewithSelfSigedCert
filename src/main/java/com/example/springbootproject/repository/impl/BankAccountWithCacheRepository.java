@@ -56,6 +56,8 @@ public class BankAccountWithCacheRepository {
     public int insertAccountByName(String firstName, int balance) {
 
         log.info("insertAccountByName Repo called");
+
+        // WATCH OUT: SQL INJECTION here
         String sql = "insert into account (first_name, balance, branch_id) values('" + firstName + "'," + balance + ", 3)";
 
         int insertedRows = jdbcTemplate.update(sql);

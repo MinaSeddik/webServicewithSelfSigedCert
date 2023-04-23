@@ -27,7 +27,7 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
 
     private static final int MAX_ATTEMPT = 10;
     @Autowired
-    public ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     // here we can implement Rate limit
     private LoadingCache<String, Integer> attemptsCache;

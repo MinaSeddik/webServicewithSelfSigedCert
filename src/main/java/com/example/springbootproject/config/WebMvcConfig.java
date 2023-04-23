@@ -20,6 +20,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -115,5 +116,10 @@ public class WebMvcConfig implements WebMvcConfigurer, WebApplicationInitializer
         servletContext.getSessionCookieConfig().setHttpOnly(true);
         servletContext.getSessionCookieConfig().setSecure(true);
 
+    }
+
+    @Bean
+    public RequestContextListener requestContextListener() {
+        return new RequestContextListener();
     }
 }

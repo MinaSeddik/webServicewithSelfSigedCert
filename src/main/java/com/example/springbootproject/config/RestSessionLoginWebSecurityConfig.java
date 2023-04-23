@@ -125,6 +125,8 @@ public class RestSessionLoginWebSecurityConfig extends WebSecurityConfigurerAdap
                 .mvcMatchers("/login", "/login.html", "/signup", "/signup.html")
                 .permitAll()
                 .anyRequest().authenticated();
+//                .and()
+//                .anonymous().disable();
 
         /*
         always – A session will always be created if one doesn't already exist.

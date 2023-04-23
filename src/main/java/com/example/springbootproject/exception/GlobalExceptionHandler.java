@@ -4,12 +4,13 @@ import com.example.springbootproject.dto.RestErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -89,6 +91,13 @@ public class GlobalExceptionHandler {
         return "database_error";
     }
 
+    @ExceptionHandler({DataAccessException.class, SQLSyntaxErrorException.class})
+    public String handleBadSqlGrammarException(HttpServletRequest request, Exception ex) {
+        log.info("BadSqlGrammarException occurred:: URL=" + request.getRequestURL());
+        return "database_error";
+    }
+
+
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "IOException occurred")
     @ExceptionHandler(IOException.class)
     public void handleIOException() {
@@ -110,6 +119,28 @@ public class GlobalExceptionHandler {
         String bodyOfResponse = "This should be application specific";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
+
+
+    @ExceptionHandler(value = {RuntimeException.class})
+    protected ResponseEntity<Object> handleRuntimeException(RuntimeException exception, HttpServletRequest request) {
+
+        String bodyOfResponse = "Internal Server error, Please contact your administrator.";
+
+        String trackId = UUID.randomUUID().toString();
+        log.error("{} - {}", trackId, exception.getMessage(), exception);
+
+        RestErrorResponse restErrorResponse = RestErrorResponse.builder()
+                .timestamp(Instant.now().toString())
+                .traceId(trackId)
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.toString())
+                .error(exception.getMessage())
+                .path(request.getServletPath())
+                .build();
+
+        return ResponseEntity.internalServerError()
+                .body(bodyOfResponse);
+    }
+
 
     private ResponseEntity<Object> handleExceptionInternal(RuntimeException ex,
                                                            String bodyOfResponse,

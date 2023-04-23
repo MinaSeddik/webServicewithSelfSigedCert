@@ -1,6 +1,8 @@
 package com.example.springbootproject.config;
 
 import com.example.springbootproject.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,10 +16,16 @@ import org.springframework.security.oauth2.client.registration.InMemoryClientReg
 import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
 import org.springframework.security.oauth2.client.web.HttpSessionOAuth2AuthorizationRequestRepository;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
 public class RestOAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    @Qualifier("customAuthenticationEntryPoint")
+    public AuthenticationEntryPoint authEntryPoint;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -32,7 +40,12 @@ public class RestOAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .anyRequest()
                 .permitAll();
+//                .and()
+//                .anonymous().disable();
 //                .authenticated();
+
+        http.exceptionHandling()
+                .authenticationEntryPoint(authEntryPoint);
     }
 
     @Override

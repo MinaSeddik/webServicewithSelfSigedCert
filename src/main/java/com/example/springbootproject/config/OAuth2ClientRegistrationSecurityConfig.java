@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 
-//@Profile("oauth2-login")
+@Profile("oauth2-login")
 @Configuration
 public class OAuth2ClientRegistrationSecurityConfig {
 

@@ -60,6 +60,7 @@ public class MyAppUserDetailsService implements UserDetailsManager {
         Supplier<UsernameNotFoundException> supplier =
                 () -> {
                     log.warn("Invalid Username {}; user doesn't exist", username);
+                    log.info("Invalid Username {}; user doesn't exist", username);
 //                    throw new UsernameNotFoundException("Username or Password isn't correct!");
                     throw new InValidCredentialsException(HttpStatus.UNAUTHORIZED, "Username or Password isn't correct!");
                 };
@@ -76,6 +77,7 @@ public class MyAppUserDetailsService implements UserDetailsManager {
                         .build())
                 .collect(Collectors.toList());
         log.debug("Authorities for {}: {}", username, authorities);
+        log.info("Authorities for {}: {}", username, authorities);
 
         // use model mapper instead
         AppUser user = AppUser.builder()

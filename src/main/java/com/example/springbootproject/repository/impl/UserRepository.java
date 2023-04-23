@@ -5,6 +5,7 @@ import com.example.springbootproject.entity.UserTableColumn;
 import com.example.springbootproject.repository.rowmapper.UserEntityRowMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
@@ -30,11 +31,10 @@ public class UserRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public Optional<UserEntity> findUserByUsername(String userName) {
+    public Optional<UserEntity> findUserByUsername(String userName) throws RuntimeException{
         log.info("Find user by username:{}", userName);
 
-        String sql = "select * from user where username = ?;";
-//        UserEntity userEntity = jdbcTemplate.queryForObject(sql, new UserEntityRowMapper(), userName);
+        String sql = "select * from user where username = ?";
 
         List<UserEntity> userEntityList = jdbcTemplate.query(sql, new UserEntityRowMapper(), userName);
 
