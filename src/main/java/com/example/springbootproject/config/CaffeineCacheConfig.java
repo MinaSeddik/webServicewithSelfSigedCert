@@ -14,6 +14,22 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class CaffeineCacheConfig {
 
+/*
+
+    Reference: https://github.com/ben-manes/caffeine/discussions/511
+
+     - expireAfterAccess and expireAfterWrite policies
+     ___________________________________________________
+
+    The two timestamps are maintained independently,
+    so it is whatever has the shortest duration. expireAfterAccess will update its
+    timestamp on every read or write, so it depends on which fixed duration is smaller.
+    If 30s access and 5 min write, then absent of writes the access policy will evict.
+    If the access duration is equal or greater, then the write policy will be dominant
+    if only reads occur
+
+ */
+
 
     @Value("${jwt.refreshToken.timeout}")
     private Duration tokenDuration;
@@ -44,6 +60,27 @@ public class CaffeineCacheConfig {
                         .build());
     }
 
+
+    // for rate limiting
+
+
+    @Bean
+    public CaffeineCache rateLimitBuckets() {
+
+//        Could be done through configuration as well
+//    spring:
+//      cache:
+//          cache-names:
+//          - rate-limit-buckets
+//          caffeine:
+//              spec: maximumSize=100000,expireAfterAccess=3600s
+
+        return new CaffeineCache("rate-limit-buckets",
+                Caffeine.<String, String>newBuilder()
+                        .maximumSize(100000)
+                        .expireAfterAccess(3600, TimeUnit.SECONDS)
+                        .build());
+    }
 
 //    @Bean
 //    public Caffeine caffeine() {

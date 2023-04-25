@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j
-public class RobustWithRetryableService {
+public class RobustWithRetractableService {
 
 
     @Retryable(value = SQLException.class)

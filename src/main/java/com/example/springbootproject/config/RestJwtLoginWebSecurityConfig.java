@@ -38,7 +38,7 @@ public class RestJwtLoginWebSecurityConfig extends WebSecurityConfigurerAdapter 
     public OtpAuthenticationProvider otpAuthenticationProvider;
 
     @Autowired
-    public ExceptionHandlerFilter exceptionHandlerFilter;
+    public ExceptionHandlerAndRateLimiterFilter exceptionHandlerFilter;
 
 
     @Bean

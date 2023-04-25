@@ -8,6 +8,7 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 @Slf4j
-public class ExceptionHandlerFilter extends OncePerRequestFilter {
+public class ExceptionHandlerAndRateLimiterFilter extends OncePerRequestFilter {
 
     private static final int MAX_ATTEMPT = 10;
     @Autowired
@@ -49,10 +50,15 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
         RestErrorResponse errorResponse;
         try {
 
+            // Note: this technique doesn't work in a distributed/clustered env
+
             // if is Blocked IP
             if (isBlocked(request)) {
                 // return error message, the IP Address is block due to frequent, unusual requests,
                 // please try again later
+
+//                Rejecting the request (HTTP 429 Too Many Requests)
+                response.setStatus(HttpStatus.TOO_MANY_REQUESTS.value());
             }
 
 

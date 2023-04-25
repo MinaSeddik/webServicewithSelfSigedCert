@@ -28,5 +28,17 @@ public enum Action {
         return eventActionClass;
     }
 
+    public String getActionText() {
+        return this.action;
+    }
+
+    public static Action resolveAction(String actionText) {
+        for (Action a : Action.values()) {
+            if (a.getActionText().equalsIgnoreCase(actionText)) {
+                return a;
+            }
+        }
+        return null;
+    }
 
 }

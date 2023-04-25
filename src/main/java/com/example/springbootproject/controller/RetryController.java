@@ -1,7 +1,7 @@
 package com.example.springbootproject.controller;
 
 import com.example.springbootproject.service.RobustWithCircuitBreakerService;
-import com.example.springbootproject.service.RobustWithRetryableService;
+import com.example.springbootproject.service.RobustWithRetractableService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class RetryController {
 
     @Autowired
-    private RobustWithRetryableService retryService;
+    private RobustWithRetractableService retryService;
 
     @Autowired
     private RobustWithCircuitBreakerService retryService2;

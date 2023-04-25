@@ -5,6 +5,9 @@ import com.example.springbootproject.audit.EventLoggingService;
 import com.example.springbootproject.audit.event.OrderCreationSuccessEventAction;
 import com.example.springbootproject.domain.Order;
 import com.example.springbootproject.domain.OrderType;
+import com.example.springbootproject.service.OrderService;
+import com.example.springbootproject.service.OrderService2;
+import com.example.springbootproject.service.OrderService3;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +20,40 @@ import java.util.UUID;
 public class OrderController {
 
     @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private OrderService2 orderService2;
+
+    @Autowired
+    private OrderService3 orderService3;
+
+    @Autowired
     private EventLoggingService eventLoggingService;
+
+    @GetMapping(value = "/create-order-retrial")
+    public String createOrder_retrial() {
+
+        Order order = Order.builder()
+                .orderId(10)
+                .orderCode(UUID.randomUUID().toString())
+                .orderType(OrderType.FBI)
+                .applicantName("John Smith - test retry")
+                .build();
+
+//        return orderService.createOrder(order);
+
+
+//        return orderService2.createOrder(order);
+
+
+//        String x = orderService2.createOrder(order);
+//        orderService2.retryCreateOrder(order);
+//        return x;
+
+        String r = orderService3.createOrder(order);
+        return r;
+    }
 
     @GetMapping(value = "/create-order")
     public Order createOrder() {
