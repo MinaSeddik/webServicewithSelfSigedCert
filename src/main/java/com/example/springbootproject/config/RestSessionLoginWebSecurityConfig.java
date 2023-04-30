@@ -154,7 +154,7 @@ public class RestSessionLoginWebSecurityConfig extends WebSecurityConfigurerAdap
                 .invalidateHttpSession(true)
                 .logoutSuccessHandler((new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK)));
 
-
+        // spring security Exception Handling
         http.exceptionHandling()
                 .authenticationEntryPoint(authEntryPoint)
                 .accessDeniedHandler(accessDeniedHandler);

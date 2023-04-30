@@ -4,6 +4,7 @@ package com.example.springbootproject.service;
 import com.example.springbootproject.repository.impl.MyTestRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,17 @@ public class MyRepoService {
         Map<String, String> map = new HashMap();
         map.put("table size", Integer.toString(size));
 
-        SecurityContext securityContext = SecurityContextHolder.getContext();
+        SecurityContext securityContext= SecurityContextHolder.getContext();
         if(!Objects.isNull(securityContext)){
             String username = securityContext.getAuthentication().getName();
             map.put("user_for service layer", username);
         }
+
+//        ReactiveSecurityContextHolder.getContext()
+//                .map(SecurityContext::getAuthentication)
+//                .doOnNext(auth -> log.info(String.valueOf(auth)))
+//                .doOnNext(auth -> map.put("table size", Integer.toString(size)))
+//                .then();
 
         return map;
     }

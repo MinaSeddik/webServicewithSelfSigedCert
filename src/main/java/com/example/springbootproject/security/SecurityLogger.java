@@ -49,8 +49,10 @@ public class SecurityLogger {
 
     @EventListener
     public void authorizationFailure(final @NonNull AuthorizationFailureEvent event) {
+
         final Object principal = event.getAuthentication().getPrincipal();
         final String message = event.getAccessDeniedException().getMessage();
+        log.error(event.getAccessDeniedException().getMessage());
         log.error("Unauthorized access - [username: \"{}\", message: \"{}\"]", principal,
                 Optional.ofNullable(message).orElse("<null>"));
 

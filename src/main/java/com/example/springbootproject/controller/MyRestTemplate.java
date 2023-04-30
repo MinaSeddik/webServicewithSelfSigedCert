@@ -20,7 +20,8 @@ public class MyRestTemplate {
 
         String uri = "http://localhost:8080/async3";
 
-        String result = restTemplate.getForObject(uri, String.class);
+        String result = "xxx";
+//        String result = restTemplate.getForObject(uri, String.class);
         System.out.println(result);
 
         System.out.println("*** callRest API Completed! Thread Name: " + Thread.currentThread().getName());

@@ -4,6 +4,7 @@ import com.example.springbootproject.dto.RestResponse;
 import com.example.springbootproject.domain.Credential;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +26,7 @@ import java.time.Instant;
 
 import static org.springframework.security.authorization.AuthorityAuthorizationManager.hasRole;
 
+@Profile("login-config")
 @RestController
 @Slf4j
 public class LoginController {

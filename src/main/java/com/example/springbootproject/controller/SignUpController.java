@@ -38,8 +38,8 @@ public class SignUpController {
     @Autowired
     private UserDetailsManager userDetailsManager;
 
-    @Autowired
-    public BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    public BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private OptService optService;
@@ -53,7 +53,7 @@ public class SignUpController {
 
         AppUser appUser = AppUser.builder()
                 .username(userInfo.getUsername())
-                .password(bCryptPasswordEncoder.encode(userInfo.getPassword()))
+//                .password(bCryptPasswordEncoder.encode(userInfo.getPassword()))
                 .authorities(List.of("READ", "WRITE", "DELETE"))
                 .mfa(userInfo.isMfa())
                 .build();

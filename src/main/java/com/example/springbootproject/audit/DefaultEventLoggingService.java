@@ -190,13 +190,15 @@ public class DefaultEventLoggingService implements EventLoggingService {
 
 
     private String getRequestAgent() {
-        String agentName = httpServletRequest.getHeader(HttpHeaders.USER_AGENT);
+//        String agentName = httpServletRequest.getHeader(HttpHeaders.USER_AGENT);
+        String agentName = "";
 
         return agentName == null ? "" : agentName;
     }
 
     private String getRequestReferer() {
-        String referer = httpServletRequest.getHeader(HttpHeaders.REFERER);
+//        String referer = httpServletRequest.getHeader(HttpHeaders.REFERER);
+        String referer = "";
 
         return referer == null ? "" : referer;
     }

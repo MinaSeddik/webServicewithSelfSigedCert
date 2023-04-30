@@ -1,27 +1,19 @@
 package com.example.springbootproject.config;
 
-import com.example.springbootproject.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
-import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
-import org.springframework.security.oauth2.client.web.HttpSessionOAuth2AuthorizationRequestRepository;
-import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
-public class RestOAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class DefaultWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     @Qualifier("customAuthenticationEntryPoint")
@@ -43,6 +35,8 @@ public class RestOAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
 //                .anonymous().disable();
 //                .authenticated();
+//                .headers()
+//                .frameOptions().disable();
 
         http.exceptionHandling()
                 .authenticationEntryPoint(authEntryPoint);

@@ -32,6 +32,7 @@ public class RobustWithCircuitBreakerService {
                 HttpMethod.GET, null, new ParameterizedTypeReference<String>() {
                 });
         return exchange.getBody();
+
     }
 
     @CircuitBreaker(maxAttempts = 3, openTimeout = 5000L, resetTimeout = 15000L)

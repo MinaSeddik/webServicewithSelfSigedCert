@@ -4,6 +4,7 @@ import com.example.springbootproject.service.MyRepoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.util.Map;
 
+
+@Profile("temp")
 @Component
 @Slf4j
 public class RecurringScheduleJob {
