@@ -1,0 +1,18 @@
+package com.example.springbootproject.config;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+//@Profile("test-mappers")
+@Configuration
+public class ModelMapperConfig {
+
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
+
+
+}
