@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.context.ApplicationPidFileWriter;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 //@SpringBootApplication(exclude = {
 //		org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,

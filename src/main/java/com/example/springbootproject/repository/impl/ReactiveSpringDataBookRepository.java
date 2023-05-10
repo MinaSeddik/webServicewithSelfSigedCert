@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 public class ReactiveSpringDataBookRepository {
     public Mono<Book> findOneByTitle(Mono<String> title) {
 
-        Book book = new Book();
+        Book book = Book.builder().build();
         title.doOnNext(t -> log.info("**title: {}", t))
                 .subscribe(book::setTitle);
 
