@@ -1,6 +1,7 @@
 com/example/springbootproject/exception/InValidJwtRefreshTokenException.class
 com/example/springbootproject/config/SpringAsyncConfig$1.class
 com/example/springbootproject/config/WebSecurityConfig.class
+com/example/springbootproject/domain/Post.class
 com/example/springbootproject/service/ReactiveAtmService.class
 com/example/springbootproject/service/RobustWithCircuitBreakerService$1.class
 com/example/springbootproject/repository/impl/ReactiveAuditRepository.class
@@ -46,6 +47,7 @@ com/example/springbootproject/oauth2/CookieUtils.class
 com/example/springbootproject/repository/JwtBlacklistRepository.class
 com/example/springbootproject/audit/SystemDetail.class
 com/example/springbootproject/actuator/model/MyAppCacheInfo.class
+com/example/springbootproject/config/MyAppVaultSslConfiguration.class
 com/example/springbootproject/audit/event/AuthorizationFailureEventAction.class
 com/example/springbootproject/repository/impl/ReactiveAtmRepository.class
 com/example/springbootproject/actuator/health/PaymentHealthIndicator.class
@@ -68,18 +70,22 @@ com/example/springbootproject/service/OtpAuthenticationProvider.class
 com/example/springbootproject/security/LoggingInterceptor.class
 com/example/springbootproject/audit/EventTime$EventTimeBuilder.class
 com/example/springbootproject/filter/ExceptionHandlerAndRateLimiterFilter$1.class
+com/example/springbootproject/service/VaultService.class
 com/example/springbootproject/dto/UserInfo$UserInfoBuilder.class
 com/example/springbootproject/dto/RestResponse.class
 com/example/springbootproject/audit/event/___AuthenticateEventAction.class
 com/example/springbootproject/config/MicrometerConfig.class
 com/example/springbootproject/config/SpringSecurityPasswordEncoderConfig.class
 com/example/springbootproject/job/RecurringScheduleJob.class
+com/example/springbootproject/converter/PostConverter.class
 com/example/springbootproject/audit/Event$EventBuilder.class
+com/example/springbootproject/dto/PostDto.class
 com/example/springbootproject/controller/LoginController.class
 com/example/springbootproject/acl/__PermissionGroup.class
 com/example/springbootproject/config/OAuth2ClientSecurityConfig.class
 com/example/springbootproject/service/OptService.class
 com/example/springbootproject/audit/EventDetail.class
+com/example/springbootproject/dto/CommentDto.class
 com/example/springbootproject/dto/RestResponse$RestResponseBuilder.class
 com/example/springbootproject/controller/LoggingController.class
 com/example/springbootproject/controller/WebSocketController$1.class
@@ -99,6 +105,7 @@ com/example/springbootproject/audit/event/OrderCreationRetrialEventAction$OrderC
 com/example/springbootproject/actuator/CacheManagerEndpoint.class
 com/example/springbootproject/sftp/SFtpOutboundGateway.class
 com/example/springbootproject/dto/RestErrorResponse$RestErrorResponseBuilder.class
+com/example/springbootproject/domain/Post$PostBuilder.class
 com/example/springbootproject/dto/UserInfo.class
 com/example/springbootproject/security/UsernamePasswordAuthentication.class
 com/example/springbootproject/audit/EventSource.class
@@ -114,11 +121,13 @@ com/example/springbootproject/audit/Client$ClientBuilder.class
 com/example/springbootproject/security/OpenIdConnectUserDetails.class
 com/example/springbootproject/service/OrderCreationRetrialService$1.class
 com/example/springbootproject/repository/impl/AuthorityRepository.class
+com/example/springbootproject/domain/Comment.class
 com/example/springbootproject/repository/impl/JwtDatabaseBlacklistRepository.class
 com/example/springbootproject/audit/event/OrderEditEventAction$OrderEditEventActionBuilder.class
 com/example/springbootproject/domain/Token.class
 com/example/springbootproject/config/OAuth2ClientSecurityConfig$NoopAuthenticationManager.class
 com/example/springbootproject/service/RetryService.class
+com/example/springbootproject/converter/AppConverter.class
 com/example/springbootproject/audit/DefaultEventLoggingService.class
 com/example/springbootproject/domain/AuditRecord$AuditRecordBuilder.class
 com/example/springbootproject/audit/event/OrderCreationSuccessEventAction.class
@@ -142,6 +151,7 @@ com/example/springbootproject/audit/UserRequestInfo$UserRequestInfoBuilder.class
 com/example/springbootproject/security/OtpAuthentication.class
 com/example/springbootproject/security/GoogleUserInfoTokenServices.class
 com/example/springbootproject/bootstrap/SpringBootStrapper.class
+com/example/springbootproject/controller/PostController.class
 com/example/springbootproject/config/WebMvcConfig.class
 com/example/springbootproject/domain/AuditRecord.class
 com/example/springbootproject/audit/event/___AuthenticateAction.class
@@ -159,10 +169,12 @@ com/example/springbootproject/entity/AuthorityEntity$AuthorityEntityBuilder.clas
 com/example/springbootproject/config/CaffeineCacheConfig.class
 com/example/springbootproject/domain/Temperature.class
 com/example/springbootproject/config/GoogleOpenIdConnectConfig.class
+com/example/springbootproject/converter/___PostConverter.class
 com/example/springbootproject/repository/impl/MyTestRepository.class
 com/example/springbootproject/service/RobustWithCircuitBreakerService.class
 com/example/springbootproject/domain/InMemoryUser.class
 com/example/springbootproject/repository/rowmapper/TokenRowMapper.class
+com/example/springbootproject/domain/PostSettings$PostSettingsBuilder.class
 com/example/springbootproject/acl/Role$RoleBuilder.class
 com/example/springbootproject/security/CustomAuthenticationFailureHandler.class
 com/example/springbootproject/repository/impl/ImperativeBigDataRepository$1.class
@@ -178,6 +190,7 @@ com/example/springbootproject/security/GoogleUser.class
 com/example/springbootproject/entity/UserEntity$UserEntityBuilder.class
 com/example/springbootproject/security/CustomAuthenticationEntryPoint.class
 com/example/springbootproject/audit/Event.class
+com/example/springbootproject/controller/VaultController.class
 com/example/springbootproject/domain/Book.class
 com/example/springbootproject/audit/EventDetail$EventDetailBuilder.class
 com/example/springbootproject/filter/AuthenticationLoggingFilter.class
@@ -186,6 +199,7 @@ com/example/springbootproject/audit/event/OrderEditEventAction.class
 com/example/springbootproject/service/MyAppAuthenticationProvider$1.class
 com/example/springbootproject/service/MyAppUserDetailsService.class
 com/example/springbootproject/audit/event/LoginFailureEventAction$LoginFailureEventActionBuilder.class
+com/example/springbootproject/service/PostService.class
 com/example/springbootproject/entity/UserTableColumn.class
 com/example/springbootproject/security/CustomMethodSecurityExpressionHandler.class
 com/example/springbootproject/exception/GlobalExceptionHandler.class
@@ -228,6 +242,7 @@ com/example/springbootproject/config/SchedulingConfig.class
 com/example/springbootproject/repository/rowmapper/BankAccountRowMapper.class
 com/example/springbootproject/acl/User.class
 com/example/springbootproject/service/OrderCreationRetrialService2$1$1.class
+com/example/springbootproject/domain/Comment$CommentBuilder.class
 com/example/springbootproject/audit/event/OrderCreationRetrialEventAction.class
 com/example/springbootproject/bootstrap/DataLoader.class
 com/example/springbootproject/controller/BookReactiveController.class
@@ -240,9 +255,11 @@ com/example/springbootproject/audit/event/OrderCreationFailureEventAction$OrderC
 com/example/springbootproject/domain/OrderType.class
 com/example/springbootproject/controller/ReactiveTemperatureEmitterController.class
 com/example/springbootproject/entity/UserEntity.class
+com/example/springbootproject/domain/PostSettings.class
 com/example/springbootproject/audit/EventSource$EventSourceBuilder.class
 com/example/springbootproject/audit/Client.class
 com/example/springbootproject/domain/BankAccount$BankAccountBuilder.class
+com/example/springbootproject/config/CustomWebContainer.class
 com/example/springbootproject/audit/event/OrderCancellationEventAction.class
 com/example/springbootproject/domain/AppUser.class
 com/example/springbootproject/repository/impl/MyAppCsrfTokenRepository.class
@@ -269,6 +286,7 @@ com/example/springbootproject/domain/Status.class
 com/example/springbootproject/controller/MyRepoController.class
 com/example/springbootproject/domain/SecurityUserDetails.class
 com/example/springbootproject/acl/Permission.class
+com/example/springbootproject/config/ModelMapperConfig.class
 com/example/springbootproject/service/OrderService2.class
 com/example/springbootproject/audit/event/LogoutSuccessEventAction$LogoutSuccessEventActionBuilder.class
 com/example/springbootproject/audit/event/UserRegistrationEventAction$UserRegistrationEventActionBuilder.class
