@@ -2,7 +2,6 @@ package com.example.springbootproject.domain;
 
 public final class Temperature {
     private double value;
-
     public Temperature() {
 
     }
