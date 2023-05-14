@@ -1,16 +1,11 @@
 package com.example.springbootproject.service;
 
-import com.example.springbootproject.domain.Order;
+import com.example.springbootproject.domain.MyOrder;
 import com.example.springbootproject.exception.MyException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Recover;
-import org.springframework.retry.annotation.Retryable;
-import org.springframework.retry.support.RetrySynchronizationManager;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +16,7 @@ public class OrderService3 {
     @Autowired
     private OrderCreationRetrialService2 orderCreationRetrialService2;
 
-    public String createOrder(Order order) {
+    public String createOrder(MyOrder order) {
 
         // create order - the normal flow
         // ....
@@ -41,7 +36,7 @@ public class OrderService3 {
     }
 
 
-    private Order retryCreateOrder(Order order) {
+    private MyOrder retryCreateOrder(MyOrder order) {
 
         // (1) order ID
         // (2) read its data from db
@@ -67,7 +62,7 @@ public class OrderService3 {
 //        List<Order> underRetrialOrders = retrieveOrderUnderRetrial();
 
         // just simulation
-        List<Order> underRetrialOrders = new ArrayList<>();
+        List<MyOrder> underRetrialOrders = new ArrayList<>();
 
         underRetrialOrders.stream().forEach(o -> {
             int attempt = 3; // read it from the db

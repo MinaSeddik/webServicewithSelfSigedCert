@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @OpenAPIDefinition(info = @Info(title = "Book API", version = "v1"))
-public class SwaggerController {
+public class Swagger3Controller {
 
     @Operation(summary = "Get a book by its id")
     @ApiResponses(value = {
@@ -28,7 +28,7 @@ public class SwaggerController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Book not found",
                     content = @Content)})
-    @GetMapping("/{id}")
+    @GetMapping("/somepath/{id}")
     public Book filterBooks(@Parameter(description = "id of book to be searched")
                             @PathVariable long id) {
 

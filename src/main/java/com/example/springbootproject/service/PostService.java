@@ -66,8 +66,13 @@ public class PostService {
 
     public Post createPost(Post post) {
 
-        // do the logic for create
+        // do the logic for create post
 
         return getSomePost();
+    }
+
+    public void deletePost(String id) {
+
+        // do the logic for delete post
     }
 }

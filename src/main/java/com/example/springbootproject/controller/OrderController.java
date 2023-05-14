@@ -1,84 +1,34 @@
 package com.example.springbootproject.controller;
 
-import com.example.springbootproject.audit.EventAction;
-import com.example.springbootproject.audit.EventLoggingService;
-import com.example.springbootproject.audit.event.OrderCreationSuccessEventAction;
 import com.example.springbootproject.domain.Order;
-import com.example.springbootproject.domain.OrderType;
-import com.example.springbootproject.service.OrderService;
-import com.example.springbootproject.service.OrderService2;
-import com.example.springbootproject.service.OrderService3;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.UUID;
 
 @RestController
 @Slf4j
 public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
-
-    @Autowired
-    private OrderService2 orderService2;
-
-    @Autowired
-    private OrderService3 orderService3;
-
-    @Autowired
-    private EventLoggingService eventLoggingService;
-
-    @GetMapping(value = "/create-order-retrial")
-    public String createOrder_retrial() {
-
-        Order order = Order.builder()
-                .orderId(10)
-                .orderCode(UUID.randomUUID().toString())
-                .orderType(OrderType.FBI)
-                .applicantName("John Smith - test retry")
-                .build();
-
-//        return orderService.createOrder(order);
 
 
-//        return orderService2.createOrder(order);
+    /*
 
+        curl -X POST -H "Content-Type: application/json"  \
+                --data '{"orderId":2,"orderType":"fbi", "applicantName":"Mina Monmon"}' \
+                http://localhost:8080/orders
 
-//        String x = orderService2.createOrder(order);
-//        orderService2.retryCreateOrder(order);
-//        return x;
+    */
 
-        String r = orderService3.createOrder(order);
-        return r;
+    @PostMapping("/orders")
+    public String createOrder(@RequestBody Order order) {
+
+        log.info("order class type: {}", order.getClass());
+
+        log.info("Order {}", order);
+
+        return "Order " + order.getClass() + " created successfully!";
     }
 
-    @GetMapping(value = "/create-order")
-    public Order createOrder() {
 
-        log.info("Inside Create Order...");
-
-        // .... do some logic to create Order - success
-
-        Order order = Order.builder()
-                .orderId(1)
-                .orderCode(UUID.randomUUID().toString())
-                .orderType(OrderType.FBI)
-                .applicantName("John Smith")
-                .build();
-
-        String paymentCode = "Stripe_" + UUID.randomUUID().toString().replaceAll("-", "");
-
-        // simulate Create order and log the event
-        EventAction orderCreationEventAction = OrderCreationSuccessEventAction.builder()
-                .order(order)
-                .paymentCode(paymentCode)
-                .build();
-
-        eventLoggingService.logEvent(orderCreationEventAction);
-
-        return order;
-    }
 }

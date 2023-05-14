@@ -19,7 +19,6 @@ import java.util.Objects;
 
 @Repository
 @Slf4j
-
 public class BankAccountWithCacheRepository {
 
     private final static String BANK_ACCOUNT_CACHE_NAME = "bankAccountCache";

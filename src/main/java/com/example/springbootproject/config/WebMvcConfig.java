@@ -1,19 +1,25 @@
 package com.example.springbootproject.config;
 
+import com.example.springbootproject.domain.Order;
+import com.example.springbootproject.mvc.converter.StringToBookStatusEnumConverter;
+import com.example.springbootproject.mvc.converter.StringToBooleanConverter;
+import com.example.springbootproject.mvc.serializer.OrderDeserializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 import org.codehaus.jackson.map.util.ISO8601DateFormat;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
@@ -21,7 +27,6 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -53,12 +58,19 @@ public class WebMvcConfig implements WebMvcConfigurer, WebApplicationInitializer
         mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);  // enable pretty-printing
+        mapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);  // enable case-insensitively of enum
 
         MappingJackson2HttpMessageConverter jacksonConverter = new MappingJackson2HttpMessageConverter();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         jacksonConverter.setObjectMapper(mapper);
 
         mapper.registerModule(new JavaTimeModule());
+
+        // register Custom Deserializer
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(Order.class, new OrderDeserializer(mapper));
+        mapper.registerModule(module);
+
 
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
@@ -74,6 +86,12 @@ public class WebMvcConfig implements WebMvcConfigurer, WebApplicationInitializer
         converters.add(new ResourceHttpMessageConverter());
         converters.add(new SourceHttpMessageConverter());
         converters.add(new FormHttpMessageConverter());
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(new StringToBooleanConverter());
+        registry.addConverter(new StringToBookStatusEnumConverter());
     }
 
     @Override

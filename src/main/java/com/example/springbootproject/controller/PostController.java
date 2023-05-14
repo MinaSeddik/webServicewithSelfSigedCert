@@ -14,7 +14,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -55,8 +57,19 @@ public class PostController {
 
     }
 
-    @GetMapping(value = "/post")
-    public PostDto getPost() {
+    // you can allow pagination
+    @GetMapping(value = "/posts")
+    public List<PostDto> getPosts() {
+
+        Post post = postService.getSomePost();
+
+        PostDto postDto = modelMapper.map(post, PostDto.class);
+
+        return Arrays.asList(postDto);
+    }
+
+    @GetMapping(value = "/posts/{id}")
+    public PostDto getPost(@PathVariable("id") String id) {
 
         Post post = postService.getSomePost();
 
@@ -68,7 +81,7 @@ public class PostController {
     //    When a client needs to replace an existing Resource entirely, they can use PUT.
     //    When they're doing a partial update, they can use HTTP PATCH.
     //    PUT is idempotent; PATCH can be idempotent but isn't required to be
-    @PutMapping(value = "/post/{id}")
+    @PutMapping(value = "/posts/{id}")
     public PostDto fullUpdate(@Valid @RequestBody PostDto postDto, @PathVariable("id") String id) {
 
         Post post = modelMapper.map(postDto, Post.class);
@@ -93,7 +106,7 @@ public class PostController {
     //    When a client needs to replace an existing Resource entirely, they can use PUT.
     //    When they're doing a partial update, they can use HTTP PATCH.
     //    PUT is idempotent; PATCH can be idempotent but isn't required to be
-    @PatchMapping(value = "/post/{id}")
+    @PatchMapping(value = "/posts/{id}")
     public PostDto partialUpdate(@RequestBody Map<String, Object> updatesMap,
                                  @PathVariable("id") String id) {
         // very important method for PATCH method when a specific field need to be updated
@@ -185,7 +198,7 @@ public class PostController {
     }
 
     //    POST means "create new" as in "Here is the input for creating a user, create it for me".
-    @PostMapping(value = "/post")
+    @PostMapping(value = "/posts")
     public ResponseEntity<PostDto> create(@Valid @RequestBody PostDto postDto) {
 
         ModelMapper mapper = new ModelMapper();
@@ -223,5 +236,37 @@ public class PostController {
                 .header(HttpHeaders.LOCATION, location.toString())
                 .body(outDto);
 
+    }
+
+//    https://stackoverflow.com/questions/31478866/delete-in-a-rest-api-without-an-entity-id-best-practice
+    @DeleteMapping(value = "/posts/{id}")
+    public ResponseEntity<?> create(@PathVariable("id") String id) {
+
+        // DELETE method doesn't accept payload
+
+        postService.deletePost(id);
+
+
+        /*
+            =====================================
+            HTTP RESPONSE
+            =====================================
+        */
+
+//        https://stackoverflow.com/questions/25970523/restful-what-should-a-delete-response-body-contain
+
+        /*
+            If a DELETE method is successfully applied, the origin server SHOULD send a 202 (Accepted)
+            status code if the action will likely succeed but has not yet been enacted, a 204 (No Content)
+            status code if the action has been enacted and no further information is to be supplied, or
+            a 200 (OK) status code if the action has been enacted and the response message includes a
+            representation describing the status.
+         */
+
+//        It says respond with a 204 status and an empty body
+//        204 No Content - Response to a successful request that won't be returning a body (like a DELETE request)
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                .build();
     }
 }

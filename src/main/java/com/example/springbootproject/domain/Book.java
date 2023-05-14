@@ -18,7 +18,6 @@ public class Book {
 
     @NotBlank
     @Size(min = 0, max = 20)
-    @JsonProperty("xx__title_custom_json_name")
     private String title;
 
     @NotBlank

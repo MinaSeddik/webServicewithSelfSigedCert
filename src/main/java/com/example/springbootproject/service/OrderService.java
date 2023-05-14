@@ -1,6 +1,6 @@
 package com.example.springbootproject.service;
 
-import com.example.springbootproject.domain.Order;
+import com.example.springbootproject.domain.MyOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class OrderService {
     private OrderCreationRetrialService orderCreationRetrialService;
 
 
-    public String createOrder(Order order) {
+    public String createOrder(MyOrder order) {
 
         // create order - the normal flow
         // ....
@@ -41,7 +41,7 @@ public class OrderService {
 
     private final ConcurrentMap<String, Boolean> map = new ConcurrentHashMap<String, Boolean>();
 
-    private void forceRetryCreateOrder(Order order) {
+    private void forceRetryCreateOrder(MyOrder order) {
 
         if (map.putIfAbsent(order.getOrderCode(), true) == null) {
             // it means that the key doesnt exist
@@ -64,7 +64,7 @@ public class OrderService {
 
     }
 
-    private void retryCreateOrder(Order order) {
+    private void retryCreateOrder(MyOrder order) {
 
         // (1) order ID
         // (2) read its data from db
@@ -89,7 +89,7 @@ public class OrderService {
 //        List<Order> underRetrialOrders = retrieveOrderUnderRetrial();
 
         // just simulation
-        List<Order> underRetrialOrders = new ArrayList<>();
+        List<MyOrder> underRetrialOrders = new ArrayList<>();
 
         underRetrialOrders.stream().forEach(o -> {
             int attempt = 3; // read it from the db

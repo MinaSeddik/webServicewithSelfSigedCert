@@ -1,6 +1,6 @@
 package com.example.springbootproject.service;
 
-import com.example.springbootproject.domain.Order;
+import com.example.springbootproject.domain.MyOrder;
 import com.example.springbootproject.exception.MyException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Backoff;
@@ -18,7 +18,7 @@ import java.util.List;
 public class OrderService2 {
 
 
-    public String createOrder(Order order) {
+    public String createOrder(MyOrder order) {
 
         // create order - the normal flow
         // ....
@@ -69,7 +69,7 @@ public class OrderService2 {
      * */
     @Retryable(include = {MyException.class}, maxAttempts = 5,
             backoff = @Backoff(delay = 60000L, maxDelay = 6000000L, multiplier = 2))
-    public void retryCreateOrder(Order order) {
+    public void retryCreateOrder(MyOrder order) {
 
         // (1) order ID
         // (2) read its data from db
@@ -91,7 +91,7 @@ public class OrderService2 {
     }
 
     @Recover
-    public void recover(MyException e, Order sql) throws SQLException {
+    public void recover(MyException e, MyOrder sql) throws SQLException {
 
         log.info("Calling recover ...");
 //        throw e;
@@ -102,7 +102,7 @@ public class OrderService2 {
 //        List<Order> underRetrialOrders = retrieveOrderUnderRetrial();
 
         // just simulation
-        List<Order> underRetrialOrders = new ArrayList<>();
+        List<MyOrder> underRetrialOrders = new ArrayList<>();
 
         underRetrialOrders.stream().forEach(o -> {
             int attempt = 3; // read it from the db
