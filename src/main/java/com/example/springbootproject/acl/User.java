@@ -1,5 +1,6 @@
 package com.example.springbootproject.acl;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 

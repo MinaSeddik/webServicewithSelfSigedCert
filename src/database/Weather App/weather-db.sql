@@ -1,0 +1,141 @@
+
+--https://vertabelo.com/blog/a-data-model-for-a-weather-app/
+
+DROP DATABASE IF EXISTS my_weather;
+
+CREATE DATABASE IF NOT EXISTS my_weather;
+
+USE my_weather;
+
+
+CREATE TABLE country
+(
+country_id  INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(100) NOT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE city
+(
+city_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(100) NOT NULL,
+zip_code VARCHAR(20) NOT NULL,
+country_id INT UNSIGNED NOT NULL,
+location GEOMETRY NOT NULL SRID 4326,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- lookup or dictionary
+CREATE TABLE weather_status
+(
+weather_status_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+status VARCHAR(100) NOT NULL UNIQUE COMMENT('rainy, cloudy, partly cloudy, or sunny'),
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+CREATE TABLE weather_daily_forecast_log
+(
+city_id INT UNSIGNED NOT NULL,
+calender_date DATE NOT NULL,
+weather_status_id INT UNSIGNED NOT NULL,
+min_temperature DECIMAL(10, 2),
+max_temperature DECIMAL(10, 2),
+avg_humidity_in_percentage DECIMAL(10, 2),
+sunrise_time TIME NOT NULL,
+sunset_time TIME NOT NULL,
+source_system VARCHAR(200),
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY(city_id, calender_date)
+);
+
+
+CREATE TABLE weather_hourly_forecast_log
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+city_id INT UNSIGNED NOT NULL,
+start_timestamp DATETIME NOT NULL,
+end_timestamp DATETIME NOT NULL,
+weather_status_id INT UNSIGNED NOT NULL,
+temperature DECIMAL(10, 2),
+feels_like_temperature DECIMAL(10, 2),
+humidity_in_percentage DECIMAL(10, 2),
+wind_speed_in_mph DECIMAL(10, 2),
+wind_direction ENUM('N', 'NW', 'NE', 'S', 'W', 'SW'),
+pressure_in_mmhg DECIMAL(10, 2),
+visibility_in_mph DECIMAL(10, 2),
+source_system VARCHAR(200),
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+--User Preferences
+
+CREATE TABLE user
+(
+user_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+fist_name VARCHAR(40) NOT NULL,
+last_name VARCHAR(40) NOT NULL,
+nickname VARCHAR(40) NOT NULL,
+email VARCHAR(50) NOT NULL,
+phone VARCHAR(20) NOT NULL,
+region VARCHAR(40) NOT NULL,
+city VARCHAR(40) NOT NULL,
+country VARCHAR(40) NOT NULL,
+username VARCHAR(40) NOT NULL,
+passwd VARCHAR(40) NOT NULL,
+active TINYINT(1) NOT NULL DEFAULT '1',
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+--The attribute table stores a list of attributes, like temperature, wind speed, wind direction, barometric pressure, etc.
+CREATE TABLE attribute
+(
+attribute_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+attribute_name VARCHAR(100) NOT NULL UNIQUE COMMENT('attributes, like temperature, wind speed, wind direction, barometric pressure, etc.'),
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+CREATE TABLE measuring_units
+(
+measuring_units_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+unit_name VARCHAR(50) NOT NULL,
+unit_description VARCHAR(100) DEFAULT NULL,
+attribute_id INT UNSIGNED NOT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)
+
+
+
+CREATE TABLE user_preferences
+(
+user_id INT UNSIGNED NOT NULL,
+attribute_id INT UNSIGNED NOT NULL,
+measuring_units_id INT UNSIGNED NOT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY(user_id, attribute_id)
+)
+
+
+
+CREATE TABLE user_city
+(
+user_id INT UNSIGNED NOT NULL,
+city_id INT UNSIGNED NOT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY(user_id, city_id)
+)
+

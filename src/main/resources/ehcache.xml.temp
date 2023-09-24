@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+         monitoring="autodetect" dynamicConfig="true">
+
+    <diskStore path="java.io.tmpdir/ehcache"/>
+
+    <!--    timeToIdleSeconds enables cached object to be kept in as long as it is requested in periods shorter than timeToIdleSeconds. timeToLiveSeconds will make the cached object be invalidated after that many seconds regardless of how many times or when it was requested.-->
+    <!--    Let's say that timeToIdleSeconds = 3. Then the object will be invalidated if it hasn't been requested for 4 seconds.-->
+    <!--    If timeToLiveSeconds = 90, then the object will be removed from cache after 90 seconds, even if it has been requested few milliseconds in the 90th second of its short life.-->
+
+    <defaultCache maxEntriesLocalHeap="10000" eternal="false"
+                  timeToIdleSeconds="120" timeToLiveSeconds="120" diskSpoolBufferSizeMB="30"
+                  maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120"
+                  memoryStoreEvictionPolicy="LRU" statistics="true">
+        <persistence strategy="localTempSwap"/>
+    </defaultCache>
+    `
+    <cache name="person2" maxEntriesLocalHeap="10000" eternal="false"
+           timeToIdleSeconds="20" timeToLiveSeconds="20">
+        <persistence strategy="localTempSwap"/>
+    </cache>
+
+    <cache name="org.hibernate.cache.internal.StandardQueryCache"
+           maxEntriesLocalHeap="5" eternal="false" timeToLiveSeconds="120">
+        <persistence strategy="localTempSwap"/>
+    </cache>
+
+    <cache name="org.hibernate.cache.spi.UpdateTimestampsCache"
+           maxEntriesLocalHeap="5000" eternal="true">
+        <persistence strategy="localTempSwap"/>
+    </cache>
+</ehcache>

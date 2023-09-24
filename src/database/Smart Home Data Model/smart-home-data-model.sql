@@ -1,0 +1,187 @@
+
+
+-- https://vertabelo.com/blog/the-smart-home-data-model/
+
+DROP DATABASE IF EXISTS smart_home;
+
+CREATE DATABASE smart_home;
+
+USE smart_home;
+
+CREATE TABLE user
+(
+user_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+first_name VARCHAR(30) NOT NULL,
+last_name VARCHAR(30) DEFAULT NULL,
+email VARCHAR(50) DEFAULT NULL,
+usename VARCHAR(50) NOT NULL,
+password VARCHAR(50) NOT NULL,
+notes TEXT DEFAULT NULL,
+photo BLOB DEFAULT NULL,
+confirmation_code VARCHAR(36) NOT NULL,
+conformation_time DATETIME COMMENT('When the registration/confirmation was completed.'),
+active TINYINT(1) NOT NULL DEFAULT '1',
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE real_estate_type
+(
+real_estate_type_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+type_name VARCHAR(100) NOT NULL UNIQUE COMMENT('apartment, house or garage'),
+description TEXT,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE real_estate
+(
+real_estate_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+real_estate_name VARCHAR(255) NOT NULL,
+user_id INT UNSIGNED NOT NULL,
+real_estate_type_id INT UNSIGNED NOT NULL,
+address_id INT UNSIGNED NOT NULL,
+details TEXT,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE area
+(
+area_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+area_name VARCHAR(255) NOT NULL,
+real_estate_id INT UNSIGNED NOT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE device_type
+(
+device_type_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+type_name VARCHAR(100) NOT NULL UNIQUE COMMENT('sensors (temperature, gas), door or window locks, lights, air conditioning and heating systems, etc.'),
+description TEXT,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE device
+(
+device_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+device_name VARCHAR(100) NOT NULL,
+real_estate_id INT UNSIGNED NOT NULL,
+area_id INT UNSIGNED NOT NULL,
+device_type_id INT UNSIGNED NOT NULL,
+device_parameters TEXT COMMENT('attribute to store all possible device parameters (e.g. intervals for storing data) in a structured textual format'),
+current_status TEXT,
+time_activated DATETIME,
+time_deactivated DATETIME,
+active TINYINT(1) NOT NULL DEFAULT '1',
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE profile
+(
+profile_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+profile_name VARCHAR(100) NOT NULL UNIQUE,
+user_id INT UNSIGNED NOT NULL,
+is_public TINYINT(1) NOT NULL DEFAULT '0' COMMENT('A flag denoting if this profile is visible publicly.'),
+allow_others TINYINT(1) NOT NULL DEFAULT '0' COMMENT('A flag denoting if this profile is shared with other users.'),
+active TINYINT(1) NOT NULL DEFAULT '1',
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE profile_device
+(
+profile_id INT UNSIGNED NOT NULL,
+device_id INT UNSIGNED NOT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE shared_with
+(
+profile_id INT UNSIGNED NOT NULL,
+user_id INT UNSIGNED NOT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE device_data
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+device_id INT UNSIGNED NOT NULL,
+data_description VARCHAR(255) NOT NULL,
+data_location TEXT COMMENT('The full path to the location where this data is stored.'),
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE auto_message
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+device_id INT UNSIGNED NOT NULL,
+message_text TEXT NOT NULL,
+is_read TINYINT(1) COMMENT('A flag denoting if the message had been read by the user.'),
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE command_type
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+type_name VARCHAR(128) NOT NULL UNIQUE COMMENT('example: “turn on/off”, “increase/decrease temperature”'),
+parameters TEXT,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+--A user could also define all recurring_commands up front.
+--Maybe we want hot water each day at 7 AM or to activate the heating/cooling system each day at 4 PM.
+--The set of rules and all needed attributes to make recurring commands happen are stored in this table
+CREATE TABLE recurring_commands
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+user_id INT UNSIGNED NOT NULL,
+device_id INT UNSIGNED NOT NULL,
+command_type_id INT UNSIGNED NOT NULL,
+parameters TEXT,
+interval_definition TEXT COMMENT('The interval between two recurrences'),
+active_from DATETIME NOT NULL,
+active_to DATETIME,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE command
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+recurring_command_id INT UNSIGNED DEFAULT NULL,
+user_id INT UNSIGNED NOT NULL,
+device_id INT UNSIGNED NOT NULL,
+command_type_id INT UNSIGNED NOT NULL,
+parameters TEXT,
+executed TINYINT(1) NOT NULL DEFAULT '0' COMMENT('A flag denoting if this command has been executed.'),
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+
+
+
+
+

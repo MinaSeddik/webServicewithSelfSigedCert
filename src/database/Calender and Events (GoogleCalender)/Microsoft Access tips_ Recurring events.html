@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0036)http://allenbrowne.com/AppRecur.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<meta http-equiv="Content-Language" content="en-au">
+<title>Microsoft Access tips: Recurring events</title>
+<meta name="keywords" content="recurring event,recurring appointment,recur,schedule,Microsoft Access,normalize">
+<meta name="description" content="Sample database showing how to program recurring events in Microsoft Access">
+<meta name="Author" content="Allen Browne">
+<meta name="copyright" content="© 2008 Allen Browne">
+<!--<base target="_top">--><base href="." target="_top">
+<link rel="stylesheet" type="text/css" href="./Microsoft Access tips_ Recurring events_files/abdt.css">
+</head>
+<body>
+<h3><a name="Top">Microsoft Access Tips for Serious Users</a></h3>
+<p>Provided by Allen Browne, February 2008</p>
+<hr>
+<div style="background-color:#3366CC; border-style:solid; border-width:1px; border-color:#CCCCCC; float: right; margin-top:10px; margin-bottom:25px; margin-left:25px; padding-left:25px; padding-right:25px; padding-top:25px; padding-bottom:25px">
+<h5>Contents:</h5>
+<p class="TocBox"><a href="http://allenbrowne.com/AppRecur.html#event" class="TipNavAnchor">Storing the event</a></p>
+<p class="TocBox"><a href="http://allenbrowne.com/AppRecur.html#occurrence" class="TipNavAnchor">Calculating the occurrences</a></p>
+<p class="TocBox"><a href="http://allenbrowne.com/AppRecur.html#exception" class="TipNavAnchor">Handling the exceptions</a></p>
+<p class="TocBox"><a href="http://allenbrowne.com/AppRecur.html#interface" class="TipNavAnchor">The interface</a></p>
+<p class="TocBox"><a href="http://allenbrowne.com/AppRecur.html#further" class="TipNavAnchor">Going further</a></p>
+<p class="TocBox"><a href="http://allenbrowne.com/AppRecur.html#curious" class="TipNavAnchor">For the curious</a></p>
+</div>
+
+<h1>Recurring events</h1>
+<p>To handle recurring events, you need a table of events and one of these approaches:</p>
+<ol style="list-style-type: upper-alpha">
+	<li>occurrences <b>calculated on the fly</b>.</li>
+	<li>a <b>related tabl</b>e for each occurrence.</li>
+	<li>&nbsp;occurrences calculated on the fly, and a <b>related table for exceptions</b>.</li>
+</ol>
+<p><b>(A)</b> is fully normalized - easy to implement and maintain. Change any aspect of the event, and all instances reflect the change.</p>
+<p>This is the best solution for simple sequences, but it cannot remove specific instances from the series or reschedule them.</p>
+<p><b>(B)</b> lets you move or remove specific instances from the series. However, it cannot cope with events that have no termination date, since you must create a finite number of instances in the related table. Also, if the user alters the information in the original event, you have headaches trying to figure out which new instances to create, old instances to delete, or existing instances to reschedule when the user may have manually set them or entered comments they want.</p>
+<p>This is the best solution for finite sequences where each instance must be handled individually, such as a schedule of repayments.</p>
+<p><b>(C)</b> combines most of the advantages of (A) and (B). This is the best solution where you occasionally need to modify the series of events.</p>
+<p>This article takes the third approach. Download the <a href="http://allenbrowne.com/binary/recur.zip">sample database</a> (45kb zipped, Access 2000 and later.)</p>
+<h2><a name="event"></a>Storing the event</h2>
+<p>In the sample database, <i>tblEvent</i> has these fields:</p>
+<table border="1" cellpadding="3">
+	<tbody><tr class="TableHeadRow">
+		<td width="112">Field Name</td>
+		<td width="112">Data Type</td>
+		<td>Description</td>
+	</tr>
+	<tr>
+		<td><b>EventID</b></td>
+		<td>AutoNumber</td>
+		<td>primary key</td>
+	</tr>
+	<tr>
+		<td>EventDescrip</td>
+		<td>Text</td>
+		<td>Event name/description</td>
+	</tr>
+	<tr>
+		<td>EventStart</td>
+		<td>Date/Time</td>
+		<td>When the series of events start (first instance)</td>
+	</tr>
+	<tr>
+		<td>RecurCount</td>
+		<td>Number</td>
+		<td>How many times it will recur. 0 for one-off. Blank if open-ended.</td>
+	</tr>
+	<tr>
+		<td>PeriodFreq</td>
+		<td>Number</td>
+		<td>How many days/months/years between recurrences. Required.</td>
+	</tr>
+	<tr>
+		<td>PeriodTypeID</td>
+		<td>Text</td>
+		<td>Type of period for recurrence (day, month, year, ...) Required.</td>
+	</tr>
+	<tr>
+		<td>Comment</td>
+		<td>Text</td>
+		<td>Comment about this entry.</td>
+	</tr>
+</tbody></table>
+<p><i>PeriodTypeID</i> will be a combo offering values that can be used in a DateAdd() expression: "d", "ww", "m", "q", or "yyyy". For example, if something occurs every calendar month, you enter 1 for <i>PeriodFreq</i>, and "m" for <i>PeriodTypeID</i>. If it happens every 30 days, you enter 30 for <i>PeriodFreq</i>, and "d" for <i>PeriodTypeID</i>.</p>
+<p>The lookup table <i>ltPeriodType</i> contains the values for the combo.</p>
+<div style="float:right; margin-top:40px; margin-left:20px"><img alt="Cartesian product query" src="./Microsoft Access tips_ Recurring events_files/RecurCartesian.png" width="492" height="336"></div>
+<h2><a name="occurrence"></a>Calculating the occurrences</h2>
+<p>To calculate each instance of an event, use a <b>Cartesian Product</b> query. Create a table with a Number field, and enter the values from zero to the highest number of&nbsp;instances you could need. In the sample database, <i>tblCount</i> has 1001 records (0&nbsp;to&nbsp;1000.)</p>
+<p><i>qryEventCartesian</i> uses <i>tblCount</i> and <i>tblEvent</i>, with no join between them. This gives every combination of the two, so 1001 records for every event. Add criteria under <i>tblCount.CountID</i> like this:<br>
+<span style="font-family: &#39;Courier New&#39;, Courier, monospace">&nbsp;&nbsp;&nbsp; &lt;=[tblEvent].[RecurCount]</span><br>
+This yields the desired number of records for each occurrence, with the count indicating which instance it is.</p>
+<p>But the open-ended events no longer match because the <i>RecurCount</i> is Null. We&nbsp;want the entire count for these, so add this on a separate criteria line:<br>
+<span style="font-family: &#39;Courier New&#39;, Courier, monospace">&nbsp;&nbsp;&nbsp; Is Null</span></p>
+<p>This simple query achieves option (A) above, i.e. all occurrences calculated on the fly.</p>
+<h2><a name="exception"></a>Handling the exceptions</h2>
+<p>Now we need another table to handle the instances that are rescheduled to another date, or to be skipped. <i>tblEventException</i> has these fields:</p>
+<table border="1" cellpadding="3">
+	<tbody><tr class="TableHeadRow">
+		<td width="112">Field Name</td>
+		<td width="112">Data Type</td>
+		<td>Description</td>
+	</tr>
+	<tr>
+		<td><b>EventID</b></td>
+		<td>Number</td>
+		<td>Relates to tblEvent.EventID. Required.</td>
+	</tr>
+	<tr>
+		<td><b>InstanceID</b></td>
+		<td>Number</td>
+		<td>Instance number. Zero for original. Required.</td>
+	</tr>
+	<tr>
+		<td>InstanceDate</td>
+		<td>Date/Time</td>
+		<td>Date this instance is rescheduled to.</td>
+	</tr>
+	<tr>
+		<td>IsCanned</td>
+		<td>Number</td>
+		<td>Checked box indicates this instance is cancelled.</td>
+	</tr>
+	<tr>
+		<td>InstanceComment</td>
+		<td>Text</td>
+		<td>Why this was cancelled/rescheduled.</td>
+	</tr>
+</tbody></table>
+<div style="float:right; margin-top:20px; margin-left:20px"><img alt="Event Dates query" src="./Microsoft Access tips_ Recurring events_files/RecurDates.png" width="492" height="320"></div>
+<p>The primary key is <i>EventID</i> + <i>InstanceID</i>, so you cannot enter two exceptions for the same instance of an event.</p>
+<p>To reschedule a particular instance to another date, enter the event, the instance number, and the new date. To cancel a particular instance, check the box in the <i>IsCanned</i> field.</p>
+<p><i>qryEventDates</i> then identifies the cancelled instances, and uses the special dates for the rescheduled instances. It uses the query above as an input "table", with an outer join to <i>tblEventException</i>.</p>
+<p>The expression to calculate the <i>EventDate</i> involves nested IIf() functions. See the sample database for details.</p>
+<p>The report <i>rptEvent</i> displays the results of this query. To limit it to a particular date range, you can easily add criteria on the <i>EventDate</i> field, or use the <i>WhereCondition</i> of <i>OpenReport</i>.</p>
+<h2><a name="interface"></a>The interface</h2>
+<p>The form is bound to <i>tblEvent</i>, with a subform bound to <i>qryEventDates</i> to display the event occurrences:</p>
+<p style="text-align: center"><img alt="Event form" src="./Microsoft Access tips_ Recurring events_files/RecurForm.png" width="708" height="527"></p>
+<p>Naturally the subform is read-only: most instances do not exist in any table. So, we provide an <i>Edit</i> button beside each instance where the user can enter, modify, or delete the records in <i>tblEventException</i>. The button opens a form in dialog mode, finding the record if it exists, or setting the Default Value for <i>EditID</i> and <i>InstanceID</i> so any new record the user adds will be for the correct row. When you close the dialog, it requeries the subform.</p>
+<h2><a name="further"></a>Going further</h2>
+<p>The sample database demonstrates the principles. Develop it further if you need to associate individuals with events and/or specific occurrences.</p>
+<p>The recurrences are very flexible, but do not handle things like "the 4th Tuesday of each month."</p>
+<p>You will need more reports, showing events in daily/weekly/monthly/annual layouts. MVP Duane Hookom has some examples of <a target="_blank" href="http://www.access.hookom.net/Samples.htm">Calender Reports</a>.</p>
+<h2><a name="curious"></a>For the curious</h2>
+<p><span style="color: #0000FF"><b>Question 1</b>. Why did you use a <b>Number</b> field instead of a <b>Yes/No</b> field for <i>tblEventException.IsCanned</i>?</span></p>
+<p style="margin-left: 40px"><b>Answer:</b>&nbsp; <i>tblEventException</i> is on the outer side of a join in <i>qryEventDates</i>. For the records that don't have an exception, this field will therefore be Null. JET does not cope when a Yes/No field becomes Null; Access may crash if you manipulate the field further. See <a href="http://allenbrowne.com/NoYesNo.html">Why I stopped using Yes/No fields</a>.</p>
+<p><span style="color: #0000FF"><b>Question 2. </b>Won't this approach fail if I need more than 1000 recurrences of an event?</span></p>
+<p style="margin-left: 40px"><b>Answer:</b>&nbsp; Add more records to <i>tblCount</i> if you need them. The beauty of this approach is that it does not rely on a finite number of related records created at the time you originally entered the event (as option (B) above does.) Just add the records to tblCount, and the additional instances appear.</p>
+<p style="color: #0000FF"><b>Question 3.</b> What's in the module <i>ajbGlobal</i>?</p>
+<p style="margin-left: 40px"><b>Answer:</b>&nbsp; Just the error handler. The database contains minimal code. In a real database, I suggest you use an <a href="http://allenbrowne.com/ser-23a.html">error logger</a>.</p>
+<p style="color: #0000FF"><b>Question 4</b>. Will this work with Access 97</p>
+<p style="margin-left: 40px"><b>Answer:</b>&nbsp; The concept and the queries should all work if you convert to an older version. Some features of the interface won't work, e.g. the conditional formatting on the manually entered dates (blue/bold dates in the subform shown above.)</p>
+<p><span style="color: #0000FF"><b>Question 5.</b> Why do you constantly misspell 'Canceled'?</span></p>
+<p style="margin-left: 40px"><b>Answer</b>:&nbsp; We use the <a href="http://www.askoxford.com/results/?view=dev_dict&amp;field-12668446=Cancel&amp;branch=13842570&amp;textsearchtype=exact&amp;sortorder=score%2Cname">British spelling</a> in my part of the world.</p>
+<p><span style="color: #0000FF"><b>Question 6.</b> How can I get the sample database?</span></p>
+<p style="margin-left: 40px"><b>Answer:</b>&nbsp; <a href="http://allenbrowne.com/binary/recur.zip">Here 'tis</a>.</p>
+<hr>
+<table width="100%">
+ <tbody><tr>
+  <td width="33%" align="center"><a href="http://allenbrowne.com/index.html">Home</a></td><td width="34%" align="center"><a href="http://allenbrowne.com/tips.html">Index of tips</a></td><td width="33%" align="center"><a href="http://allenbrowne.com/AppRecur.html#Top">Top</a></td>
+ </tr>
+</tbody></table>
+
+</body></html>

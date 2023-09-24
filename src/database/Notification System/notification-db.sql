@@ -1,0 +1,52 @@
+DROP DATABASE IF EXISTS my_notification;
+
+CREATE DATABASE my_notification;
+
+USE my_notification;
+
+CREATE TABLE user
+(
+user_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+first_name VARCHAR(30) NOT NULL,
+last_name VARCHAR(30) DEFAULT NULL,
+address_id INT UNSIGNED DEFAULT NULL,   -- address table FK
+email VARCHAR(50) DEFAULT NULL,
+usename VARCHAR(50) NOT NULL,
+password VARCHAR(50) NOT NULL,
+notes TEXT DEFAULT NULL,
+photo BLOB DEFAULT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+CONSTRAINT fk_customer_address FOREIGN KEY (address_id) REFERENCES address(address_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+CREATE TABLE notification_type
+(
+type_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+name
+description
+templete
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- this notification is designed to be sent to a single user
+CREATE TABLE notification
+(
+notification_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+user_id INT UNSIGNED NOT NULL,          -- FK
+source_id    *****
+source_type_id          -- FK (notification_type)  or ENUM according to the business req
+message   -- it may be JSON
+read TINYINT(1) NOT NULL DEFAULT '0',
+trash TINYINT(1) NOT NULL DEFAULT '0',
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+
+
+
+

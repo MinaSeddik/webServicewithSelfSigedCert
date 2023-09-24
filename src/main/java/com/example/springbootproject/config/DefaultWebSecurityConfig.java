@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -28,7 +27,27 @@ public class DefaultWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 //        http.oauth2Client();
 
+        /*
 
+        Clickjacking attack prevention
+        -------------------------------
+
+
+        Reference: https://stackoverflow.com/questions/28647136/how-to-disable-x-frame-options-response-header-in-spring-security
+        By default X-Frame-Options is set to denied, to prevent clickjacking attacks.
+
+        DENY - is a default value. With this the page cannot be displayed in a frame, regardless of the site attempting to do so.
+        SAMEORIGIN - I assume this is what you are looking for, so that the page will be (and can be) displayed in a frame on the same origin as the page itself
+        ALLOW-FROM - Allows you to specify an origin, where the page can be displayed in a frame.
+
+*/
+
+        /*
+
+         Spring default security headers
+         https://docs.spring.io/spring-security/site/docs/5.0.x/reference/html/headers.html
+
+         */
         http.authorizeRequests()
                 .anyRequest()
                 .permitAll();
@@ -36,7 +55,7 @@ public class DefaultWebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .anonymous().disable();
 //                .authenticated();
 //                .headers()
-//                .frameOptions().disable();
+//                .frameOptions().disable();  // disabled by default
 
         http.exceptionHandling()
                 .authenticationEntryPoint(authEntryPoint);

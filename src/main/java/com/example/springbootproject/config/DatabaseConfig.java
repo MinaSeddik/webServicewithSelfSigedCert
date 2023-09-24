@@ -2,6 +2,7 @@ package com.example.springbootproject.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +23,16 @@ public class DatabaseConfig extends HikariConfig {
         return new HikariDataSource(this);
     }
 
-//    @Bean
-//    public PlatformTransactionManager txManager() {
-//        return new DataSourceTransactionManager(dataSource());
-//    }
+    /*
+    @Bean
+//    @ConditionalOnMissingBean(PlatformTransactionManager.class)
+    public PlatformTransactionManager txManager() {
+        return new DataSourceTransactionManager(dataSource());
+    }
+*/
+    @Bean
+    public PlatformTransactionManager transactionManager() {
+        return new DataSourceTransactionManager(dataSource());
+    }
 
 }

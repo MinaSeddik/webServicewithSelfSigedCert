@@ -4,16 +4,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.r2dbc.R2dbcTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.context.ApplicationPidFileWriter;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 //@SpringBootApplication(exclude = {
 //		org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
 //		org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class}
 //)
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class,
+
+        // disable R2dbc transaction
+        R2dbcTransactionManagerAutoConfiguration.class})
 @Slf4j
 public class SpringbootProjectApplication implements CommandLineRunner {
 
@@ -42,5 +45,18 @@ public class SpringbootProjectApplication implements CommandLineRunner {
         for (int i = 0; i < args.length; ++i) {
             log.info("args[{}]: {}", i, args[i]);
         }
+
+
+        // log4j CVE-2021-44228 - fixed in 2.15.0
+
+//        String data = "${env:java.version}";  //env lookup
+        String data = "${java:runtime}";  //env lookup
+//        String data = "${env:HOME}";  // env lookup
+//        String data = "${jndi:ldap//}"; // jndi lookup
+
+        log.info("here is a sample log: " + data);
+        log.info("here is a sample log: {}", data);
+
+
     }
 }

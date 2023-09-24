@@ -11,8 +11,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.IntStream;
 
-@Repository
-@Slf4j
+    @Repository
+    @Slf4j
 public class OtpRecoveryRepository {
 
     @Autowired

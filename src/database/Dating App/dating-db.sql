@@ -1,0 +1,144 @@
+
+-- https://vertabelo.com/blog/a-dating-app-data-model/
+
+DROP DATABASE IF EXISTS my_dating;
+
+CREATE DATABASE IF NOT EXISTS my_dating;
+
+USE my_dating;
+
+
+CREATE TABLE gender
+(
+gender_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+gender_name VARCHAR(50) NOT NULL UNIQUE,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE user
+(
+user_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+fist_name VARCHAR(40) NOT NULL,
+last_name VARCHAR(40) NOT NULL,
+gender_id INT UNSIGNED NOT NULL,
+nickname VARCHAR(40) NOT NULL,
+email VARCHAR(50) NOT NULL,
+phone VARCHAR(20) NOT NULL,
+region VARCHAR(40) NOT NULL,
+city VARCHAR(40) NOT NULL,
+country VARCHAR(40) NOT NULL,
+username VARCHAR(40) NOT NULL,
+passwd VARCHAR(40) NOT NULL,
+confirmation_code VARCHAR(40) NOT NULL,
+confirmation_time DATETIME COMMENT('When user confirmed their email address.'),
+details TEXT COMMENT('The user’s text description of themself'),
+popularity DECIMAL(5, 2) COMMENT('The user’s popularity, as calculated from their grades and blocks.'),
+active TINYINT(1) NOT NULL DEFAULT '1',
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE interested_in_gender
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+user_id INT UNSIGNED NOT NULL,
+interested_in_gender_id INT UNSIGNED NOT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE relationship_type
+(
+relationship_type_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(50) NOT NULL UNIQUE COMMENT(' “romantic dinner” or “casual date” ... '),
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE interested_in_relation
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+user_id INT UNSIGNED NOT NULL,
+relationship_type_id INT UNSIGNED NOT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)
+
+
+CREATE TABLE user_photo
+(
+photo_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+user_id INT UNSIGNED NOT NULL,
+link VARCHAR(255) NOT NULL COMMENT('Links to the location where this photo is stored.'),
+details TEXT,
+active TINYINT(1) NOT NULL DEFAULT '1',
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE conversation
+(
+conversation_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+user_id INT UNSIGNED NOT NULL COMMENT('the user who initiated the conversation'),
+time_started TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+time_closed TIMESTAMP DEFAULT NULL,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+--The user who started the conversation will invite one or more users to it.
+CREATE TABLE participant
+(
+conversation_id INT UNSIGNED NOT NULL,
+user_id INT UNSIGNED NOT NULL,
+time_joined DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+time_left DATETIME DEFAULT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (conversation_id, participant_id)
+);
+
+
+CREATE TABLE message
+(
+message_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+participant_id INT UNSIGNED NOT NULL,
+message_text TEXT,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE grade
+(
+grade_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+user_id_given INT UNSIGNED NOT NULL,
+user_id_received INT UNSIGNED NOT NULL,
+rate INT UNSIGNED NOT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE block_user
+(
+id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+user_id INT UNSIGNED NOT NULL,
+user_id_blocked INT UNSIGNED NOT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+--We could calculate the popularity of each user based on the grades they are given and how many blocks they have.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+
