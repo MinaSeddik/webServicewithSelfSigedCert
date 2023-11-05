@@ -148,6 +148,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({DataAccessException.class, SQLSyntaxErrorException.class})
     public String handleBadSqlGrammarException(HttpServletRequest request, Exception ex) {
         log.info("BadSqlGrammarException occurred:: URL=" + request.getRequestURL());
+        log.info("BadSqlGrammarException occurred:: ex=", ex.getMessage());
+        log.info("BadSqlGrammarException occurred:: ex=", ex);
         return "database_error";
     }
 
@@ -171,6 +173,10 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
 
         String bodyOfResponse = "This should be application specific";
+
+        String trackId = UUID.randomUUID().toString();
+        log.error("{} - {}", trackId, ex.getMessage(), ex);
+
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
@@ -201,9 +207,19 @@ public class GlobalExceptionHandler {
                                                            HttpHeaders httpHeaders,
                                                            HttpStatus conflict,
                                                            WebRequest request) {
-        // ...
-        return ResponseEntity.badRequest()
-                .body(bodyOfResponse);
+        RestErrorResponse restErrorResponse = RestErrorResponse.builder()
+                .timestamp(Instant.now().toString())
+//                .traceId(trackId)
+                .status(HttpStatus.BAD_REQUEST.toString())
+//                .status(HttpStatus.CONFLICT.toString())
+                .error(ex.getMessage())
+//                .path(request.getServletPath())
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(restErrorResponse);
+
     }
 
 

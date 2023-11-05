@@ -2,59 +2,59 @@ package com.example.springbootproject.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Formula;
+//import org.hibernate.annotations.Cache;
+//import org.hibernate.annotations.CacheConcurrencyStrategy;
+//import org.hibernate.annotations.Formula;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
-@Entity
-@Table(name = "tableName", uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
-@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "cache_region")
+//@Entity
+//@Table(name = "tableName", uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
+//@Cacheable
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "cache_region")
 @Getter
 @Setter
 public class JpaEntity implements Serializable {
 
 
-    @Id
-//    GenerationType.IDENTITY : It is responsibility of database to generate unique identifier.
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true, length = 11)
+//    @Id
+////    GenerationType.IDENTITY : It is responsibility of database to generate unique identifier.
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id", nullable = false, unique = true, length = 11)
     private int id;
 
-    @Column(name = "name", length = 20, nullable = true)
+//    @Column(name = "name", length = 20, nullable = true)
     private String name;
 
-    @Column(name = "first_name")
+//    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name")
+//    @Column(name = "last_name")
     private String lastName;
 
-    @Transient
+//    @Transient
     private String fullName;
 
-    @Column(name = "role", length = 20, nullable = true)
+//    @Column(name = "role", length = 20, nullable = true)
     private String role;
 
-    @Column(name = "insert_time", nullable = true)
+//    @Column(name = "insert_time", nullable = true)
     private Date insertTime;
 
     //    Collections aren't cached by default, and we need to explicitly mark them as cacheable
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @OneToMany
+//    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//    @OneToMany
     private Collection<Account2> accounts;
 
-    @Transient
+//    @Transient
     int age;
 
     @CreatedBy
@@ -69,11 +69,11 @@ public class JpaEntity implements Serializable {
     @LastModifiedDate
     private Date modifiedAt;
 
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
     //    We don't have to specify the @Enumerated annotation at all if we're going to persist the Gender by the enum‘s ordinal.
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     /*
@@ -92,7 +92,7 @@ public class JpaEntity implements Serializable {
 
         Also, keep in mind that the value is calculated when the entity is fetched from the database.
      */
-    @Formula("grossIncome * taxInPercents / 100")
+//    @Formula("grossIncome * taxInPercents / 100")
 //    @Formula(value = "date_part(year, age(dateOfBirth))")
     private long tax;
 

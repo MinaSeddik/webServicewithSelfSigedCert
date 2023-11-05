@@ -4,8 +4,10 @@ import com.example.springbootproject.repository.JwtBlacklistRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
+@Profile("jwt-caffeine")
 @Repository
 @Slf4j
 public class JwtCaffeineCacheBlacklistRepository implements JwtBlacklistRepository {

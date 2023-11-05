@@ -1,0 +1,31 @@
+2023-11-01T23:20:07.699+0200 INFO test ws...
+2023-11-01T23:20:07.879+0200 INFO Connecting to ws://localhost:8080/mywebsockets
+2023-11-01T23:20:08.011+0200 INFO New session established : 0d36c762-776c-a70e-5562-fbd0c1c08fb6
+2023-11-01T23:20:08.014+0200 INFO Subscribed to /topic/news
+2023-11-01T23:20:08.065+0200 INFO Received : 3113d054-0d50-4cce-bf1c-eff16d871b25
+2023-11-01T23:20:13.018+0200 INFO Received : XXXXXXXXXXXXXXXXXXXXXXXXXXXXXdddddd
+2023-11-01T23:21:36.128+0200 INFO test ws...
+2023-11-01T23:21:36.298+0200 INFO Connecting to ws://localhost:8080/mywebsockets
+2023-11-01T23:21:36.334+0200 DEBUG Connecting to ws://localhost:8080/mywebsockets
+2023-11-01T23:21:36.388+0200 DEBUG New StandardWebSocketSession[id=31644295-a3ae-80b8-1420-0ef7da414452, uri=null]
+2023-11-01T23:21:36.389+0200 DEBUG Connection established in session id=01539ab2-ce6a-a6e9-a75c-0ff9efcf814c
+2023-11-01T23:21:36.411+0200 INFO New session established : 01539ab2-ce6a-a6e9-a75c-0ff9efcf814c
+2023-11-01T23:21:36.414+0200 INFO Subscribed to /topic/news
+2023-11-01T23:21:36.465+0200 INFO Received : 0513f54d-30b2-442a-b518-83dfa5e3576c
+2023-11-01T23:21:41.416+0200 INFO Received : XXXXXXXXXXXXXXXXXXXXXXXXXXXXXdddddd
+2023-11-01T23:25:13.561+0200 INFO test Web Socket Connection ...
+2023-11-01T23:25:13.565+0200 INFO Prepare WebSocketClient ...
+2023-11-01T23:25:13.593+0200 INFO Prepare stompClient ...
+2023-11-01T23:25:13.597+0200 INFO Set converters ...
+2023-11-01T23:25:13.737+0200 INFO URL = ws://localhost:8080/mywebsockets
+2023-11-01T23:25:13.738+0200 INFO Connecting to ws://localhost:8080/mywebsockets
+2023-11-01T23:25:13.779+0200 DEBUG Connecting to ws://localhost:8080/mywebsockets
+2023-11-01T23:25:13.789+0200 INFO Retreive session from connection ...
+2023-11-01T23:25:13.837+0200 DEBUG New StandardWebSocketSession[id=72b275cd-e1e4-5c08-b786-e76e84c2ccd0, uri=null]
+2023-11-01T23:25:13.839+0200 DEBUG Connection established in session id=1af69390-4378-0bf6-93ac-160234f9613a
+2023-11-01T23:25:13.857+0200 INFO Sleep 5 seconds ...
+2023-11-01T23:25:13.857+0200 INFO New session established : 1af69390-4378-0bf6-93ac-160234f9613a
+2023-11-01T23:25:13.859+0200 INFO Subscribed to /topic/news
+2023-11-01T23:25:13.906+0200 INFO Received : f7fc5d57-b945-439b-a883-597f35330f95
+2023-11-01T23:25:18.857+0200 INFO Send MSG for testing ...
+2023-11-01T23:25:18.866+0200 INFO Received : XXXXXXXXXXXXXXXXXXXXXXXXXXXXX

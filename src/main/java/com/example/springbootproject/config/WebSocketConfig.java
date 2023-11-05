@@ -6,10 +6,12 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+//https://stackoverflow.com/questions/52999004/subscribemapping-vs-messagemapping
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
+    // for regular connection ws://localhost:8443/mywebsockets
     /*
     curl --include \
             --no-buffer \
@@ -22,7 +24,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     http://localhost:8080/mywebsockets
     */
 
-    // for secure connection wss://...
+    // for secure connection wss://localhost:8443/mywebsockets
     /*
     curl -k --include \
         --no-buffer \

@@ -2,10 +2,10 @@ package com.example.springbootproject.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+//import org.hibernate.annotations.Cache;
+//import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 
 /*
 
@@ -18,19 +18,19 @@ name VARCHAR(40)
 
  */
 
-@Entity
-@Table(name = "account2",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"account_id"})})
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "account")
+//@Entity
+//@Table(name = "account2",
+//        uniqueConstraints = {@UniqueConstraint(columnNames = {"account_id"})})
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "account")
 @Getter
 @Setter
 public class Account2 {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "account_id")
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "account_id")
     private int id;
 
-    @Column(name = "name")
+//    @Column(name = "name")
     private String name;
 }

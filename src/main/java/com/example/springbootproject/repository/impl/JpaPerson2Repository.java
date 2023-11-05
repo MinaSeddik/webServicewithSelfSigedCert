@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
+@Profile("hibernate")
 public interface JpaPerson2Repository extends CrudRepository<Person2, Integer> {
     Optional<Person2> findByFirstName(String firstName);
 }

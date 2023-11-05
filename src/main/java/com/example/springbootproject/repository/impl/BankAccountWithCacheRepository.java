@@ -1,6 +1,7 @@
 package com.example.springbootproject.repository.impl;
 
 
+import com.example.springbootproject.domain.Account2;
 import com.example.springbootproject.domain.BankAccount;
 import com.example.springbootproject.repository.rowmapper.BankAccountRowMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,15 @@ public class BankAccountWithCacheRepository {
         log.info("getAllAccounts Repo called");
         return jdbcTemplate.query("select * from account", new BankAccountRowMapper());
     }
+
+    @Cacheable(value = BANK_ACCOUNT_CACHE_NAME, key="#account2.name")
+    public BankAccount getAccount(Account2 account2) {
+
+        log.info("getAccountById Repo called");
+        return jdbcTemplate.queryForObject("select * from account where id = ?",
+                new BankAccountRowMapper(), 4);
+    }
+
 
     @Cacheable(value = BANK_ACCOUNT_CACHE_NAME)
     public BankAccount getAccountById(int id) {

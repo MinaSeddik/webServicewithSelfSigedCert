@@ -2,14 +2,14 @@ package com.example.springbootproject.repository.impl;
 
 
 import com.example.springbootproject.domain.Person2;
-import com.example.springbootproject.repository.jpa.NamesOnly;
+//import com.example.springbootproject.repository.jpa.NamesOnly;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.query.Procedure;
+//import org.springframework.data.jpa.repository.Modifying;
+//import org.springframework.data.jpa.repository.Query;
+//import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -62,7 +62,7 @@ public interface JpaPersonRepository extends CrudRepository<Person2, Integer> {
 
         selects sub-set of fields - Not all column
      */
-    Collection<NamesOnly> findByLastName(String lastname);
+//    Collection<NamesOnly> findByLastName(String lastname);
     <T> T findByLastName(String lastName, Class<T> type);
 
 
@@ -76,14 +76,17 @@ public interface JpaPersonRepository extends CrudRepository<Person2, Integer> {
         of the annotation
 
      */
-    @Query("SELECT MAX(eventId) AS eventId FROM Event ")
+
+
+
+//    @Query("SELECT MAX(eventId) AS eventId FROM Event ")
     Long lastProcessedEvent();
 
-    @Query(value = "SELECT * FROM USERS u WHERE u.status = 1", nativeQuery = true)
+//    @Query(value = "SELECT * FROM USERS u WHERE u.status = 1", nativeQuery = true)
     Collection<Person2> findAllActiveUsersNative();
 
 
-    @Query(" FROM Event WHERE status = :status AND TIME_TO_SEC(TIMEDIFF(:now, lastUpdateTs)) >= :duration")
+//    @Query(" FROM Event WHERE status = :status AND TIME_TO_SEC(TIMEDIFF(:now, lastUpdateTs)) >= :duration")
     List<Person2> findByStatusAndDuration(  @Param("status") String status,
                                             @Param("duration") Integer duration,
                                             @Param("now") Timestamp now);
@@ -95,63 +98,63 @@ public interface JpaPersonRepository extends CrudRepository<Person2, Integer> {
         Note:   When the @Query annotation uses native SQL, then it's not possible to define a Sort.
 
      */
-    @Query(value = "SELECT u FROM User u")
+//    @Query(value = "SELECT u FROM User u")
     List<Person2> findAllUsers(Sort sort);
 
-    @Query(value = "SELECT u FROM User u ORDER BY id")
+//    @Query(value = "SELECT u FROM User u ORDER BY id")
     Page<Person2> findAllUsersWithPagination(Pageable pageable);
 
     // enable pagination for native queries by declaring an additional attribute countQuery.
-    @Query(value = "SELECT * FROM Users ORDER BY id", countQuery = "SELECT count(*) FROM Users", nativeQuery = true)
+//    @Query(value = "SELECT * FROM Users ORDER BY id", countQuery = "SELECT count(*) FROM Users", nativeQuery = true)
     Page<Person2> findAllUsersWithPagination2(Pageable pageable);
 
-    @Query("SELECT u FROM User u WHERE u.status = ?1")
+//    @Query("SELECT u FROM User u WHERE u.status = ?1")
     Person2 findUserByStatus(Integer status);
 
-    @Query("SELECT u FROM User u WHERE u.status = ?1 and u.name = ?2")
+//    @Query("SELECT u FROM User u WHERE u.status = ?1 and u.name = ?2")
     Person2 findUserByStatusAndName(Integer status, String name);
 
-    @Query(value = "SELECT * FROM Users u WHERE u.status = ?1", nativeQuery = true)
+//    @Query(value = "SELECT * FROM Users u WHERE u.status = ?1", nativeQuery = true)
     Person2 findUserByStatusNative(Integer status);
 
-    @Query("SELECT u FROM User u WHERE u.status = :status and u.name = :name")
+//    @Query("SELECT u FROM User u WHERE u.status = :status and u.name = :name")
     Person2 findUserByStatusAndNameNamedParams(@Param("status") Integer status, @Param("name") String name);
 
 
-    @Query(value = "SELECT * FROM Users u WHERE u.status = :status and u.name = :name", nativeQuery = true)
+//    @Query(value = "SELECT * FROM Users u WHERE u.status = :status and u.name = :name", nativeQuery = true)
     Person2 findUserByStatusAndNameNamedParamsNative(@Param("status") Integer status, @Param("name") String name);
 
-    @Query(value = "SELECT u FROM User u WHERE u.name IN :names")
+//    @Query(value = "SELECT u FROM User u WHERE u.name IN :names")
     List<Person2> findUserByNameList(@Param("names") Collection<String> names);
 
-    @Modifying
+//    @Modifying
     @Transactional
-    @Query("update User u set u.status = :status where u.name = :name")
+//    @Query("update User u set u.status = :status where u.name = :name")
     int updateUserSetStatusForName(@Param("status") Integer status, @Param("name") String name);
 
-    @Modifying
+//    @Modifying
     @Transactional
-    @Query(value = "update Users u set u.status = ? where u.name = ?", nativeQuery = true)
+//    @Query(value = "update Users u set u.status = ? where u.name = ?", nativeQuery = true)
     int updateUserSetStatusForNameNative(Integer status, String name);
 
     /*
         To perform an insert operation, we have to both apply @Modifying and use a native query
         since INSERT is not a part of the JPA interface:
      */
-    @Modifying
+//    @Modifying
     @Transactional
-    @Query(value = "insert into Users (name, age, email, status) values (:name, :age, :email, :status)", nativeQuery = true)
+//    @Query(value = "insert into Users (name, age, email, status) values (:name, :age, :email, :status)", nativeQuery = true)
     void insertUser(@Param("name") String name, @Param("age") Integer age,
                     @Param("status") Integer status, @Param("email") String email);
 
     @Transactional
-    @Modifying
-    @Query(value = "UPDATE USER_USAGE SET DAILY_COUNT = DAILY_COUNT + ?, WEEKLY_COUNT= WEEKLY_COUNT + ?,MONTHLY_COUNT= MONTHLY_COUNT + ?, "
-            + " DAILY_USAGE = DAILY_USAGE + ?, WEEKLY_USAGE = WEEKLY_USAGE + ?, MONTHLY_USAGE = MONTHLY_USAGE + ? WHERE USER_ID = ? AND SERVICE_ID = ?", nativeQuery = true)
+//    @Modifying
+//    @Query(value = "UPDATE USER_USAGE SET DAILY_COUNT = DAILY_COUNT + ?, WEEKLY_COUNT= WEEKLY_COUNT + ?,MONTHLY_COUNT= MONTHLY_COUNT + ?, "
+//            + " DAILY_USAGE = DAILY_USAGE + ?, WEEKLY_USAGE = WEEKLY_USAGE + ?, MONTHLY_USAGE = MONTHLY_USAGE + ? WHERE USER_ID = ? AND SERVICE_ID = ?", nativeQuery = true)
     int updateUsage(int dailyc, int weeklyc, int monthlyc, double dailya, double weeklya, double monthlya, String userId, Integer service);
 
     // call stored procedure
-    @Query(value = "CALL FIND_MY_ENTITY(:proc_param);", nativeQuery = true)
+//    @Query(value = "CALL FIND_MY_ENTITY(:proc_param);", nativeQuery = true)
     List<Person2> findEntitesByParam(@Param("proc_param") String procParam);
 
     /*
@@ -163,10 +166,10 @@ public interface JpaPersonRepository extends CrudRepository<Person2, Integer> {
             SELECT COUNT(*) into count_out from car WHERE model = model_in;
         END
      */
-    @Procedure("GET_TOTAL_CARS_BY_MODEL")
+//    @Procedure("GET_TOTAL_CARS_BY_MODEL")
     int getTotalCarsByModel(String model);
 
-    @Procedure(procedureName = "GET_TOTAL_CARS_BY_MODEL")
+//    @Procedure(procedureName = "GET_TOTAL_CARS_BY_MODEL")
     int getTotalCarsByModelProcedureName(String model);
 
 
@@ -177,7 +180,7 @@ public interface JpaPersonRepository extends CrudRepository<Person2, Integer> {
         END
 
      */
-    @Query(value = "CALL FIND_CARS_AFTER_YEAR(:year_in);", nativeQuery = true)
+//    @Query(value = "CALL FIND_CARS_AFTER_YEAR(:year_in);", nativeQuery = true)
     List<Person2> findCarsAfterYear(@Param("year_in") Integer year_in);
 
 

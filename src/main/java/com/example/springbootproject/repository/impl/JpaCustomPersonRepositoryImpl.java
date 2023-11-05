@@ -3,30 +3,33 @@ package com.example.springbootproject.repository.impl;
 import com.example.springbootproject.domain.Account2;
 import com.example.springbootproject.domain.Person2;
 import com.example.springbootproject.domain.Person2ResultSet;
-import com.example.springbootproject.domain.Person2_;
+//import com.example.springbootproject.domain.Person2_;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
+//import javax.persistence.EntityManager;
+//import javax.persistence.PersistenceContext;
+//import javax.persistence.TypedQuery;
+//import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Repository
 @Slf4j
+@Profile("hibernate")
 public class JpaCustomPersonRepositoryImpl implements JpaCustomPersonRepository {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+//    @PersistenceContext
+//    private EntityManager entityManager;
 
     /*
         Reference: https://www.baeldung.com/hibernate-criteria-queries
      */
     @Override
     public List<Person2> findUserByEmails(Set<String> emails) {
+        /*
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
         CriteriaQuery<Person2> criteriaQuery = cb.createQuery(Person2.class);
@@ -48,11 +51,16 @@ public class JpaCustomPersonRepositoryImpl implements JpaCustomPersonRepository 
 
         return entityManager.createQuery(criteriaQuery)
                 .getResultList();
+
+         */
+        return null;
     }
 
     @Override
     public List<Person2> findWhatever(Set<String> params) {
+        /*
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+
 
         CriteriaQuery<Long> criteriaQuery = cb.createQuery(Long.class);
         Root<Person2> root = criteriaQuery.from(Person2.class);
@@ -171,11 +179,11 @@ public class JpaCustomPersonRepositoryImpl implements JpaCustomPersonRepository 
         criteriaQuery7.groupBy(person2Root.get("firstName"));
 //        criteriaQuery7.multiselect(person2Root, person2Root);
 
-        criteriaQuery7.multiselect(
-                projectJoin.get(Person2_.ID).alias("projectId"),
-                projectJoin.get(Person2_.FIRST_NAME).alias("name"),
-                cb.count(root.get("id")).alias("cnt")
-        );
+//        criteriaQuery7.multiselect(
+//                projectJoin.get(Person2_.ID).alias("projectId"),
+//                projectJoin.get(Person2_.FIRST_NAME).alias("name"),
+//                cb.count(root.get("id")).alias("cnt")
+//        );
 
         List<Person2ResultSet> result2 = entityManager.createQuery(criteriaQuery7)
                 .getResultList();
@@ -205,7 +213,7 @@ public class JpaCustomPersonRepositoryImpl implements JpaCustomPersonRepository 
         entityManager.createQuery(criteriaUpdate)
                 .executeUpdate();
 
-
+*/
         return null;
 
     }

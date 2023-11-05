@@ -2,7 +2,9 @@ package com.example.springbootproject.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.quartz.QuartzDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +17,12 @@ import javax.sql.DataSource;
 @Configuration
 @ConfigurationProperties("spring.datasource")
 @EnableTransactionManagement
+@EnableAutoConfiguration
 // Adding @EnableTransactionManagement annotation creates a PlatformTransactionManager for you
 public class DatabaseConfig extends HikariConfig {
 
     @Bean
+    @QuartzDataSource
     public DataSource dataSource() {
         return new HikariDataSource(this);
     }

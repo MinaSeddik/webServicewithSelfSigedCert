@@ -2,11 +2,11 @@ package com.example.springbootproject.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Formula;
+//import org.hibernate.annotations.Cache;
+//import org.hibernate.annotations.CacheConcurrencyStrategy;
+//import org.hibernate.annotations.Formula;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -28,32 +28,32 @@ insert_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMES
  */
 
 
-@Entity
-@Table(name = "person2", uniqueConstraints = {@UniqueConstraint(columnNames = {"person_id"})})
-@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "person2")
+//@Entity
+//@Table(name = "person2", uniqueConstraints = {@UniqueConstraint(columnNames = {"person_id"})})
+//@Cacheable
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "person2")
 @Getter
 @Setter
 public class Person2 implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "person_id")
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "person_id")
     private Integer id;
 
-    @Column(name = "first_name")
+//    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name")
+//    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "role", length = 20, nullable = true)
+//    @Column(name = "role", length = 20, nullable = true)
     private String role;
 
-    @Column(name = "age")
+//    @Column(name = "age")
     private int age;
 
-    @Column(name = "insert_time")
+//    @Column(name = "insert_time")
     private Date insertTime;
 
 //    @OneToMany(cascade = CascadeType.ALL)
@@ -65,7 +65,7 @@ public class Person2 implements Serializable {
 //    private Collection<Address> addresses;
 
 
-    @Transient
+//    @Transient
     private String fullName;
 
 //    @Formula("grossIncome * taxInPercents / 100")

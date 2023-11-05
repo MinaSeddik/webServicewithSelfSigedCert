@@ -9,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.persistence.EntityManager;
+//import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -24,8 +24,8 @@ class JpaMultipleEntityRepositoryTest {
     private DataSource dataSource;
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    @Autowired
-    private EntityManager entityManager;
+//    @Autowired
+//    private EntityManager entityManager;
 //    @Autowired
 //    private UserRepository userRepository;
 
@@ -38,7 +38,7 @@ class JpaMultipleEntityRepositoryTest {
     void injectedComponentsAreNotNull() {
         assertThat(dataSource).isNotNull();
         assertThat(jdbcTemplate).isNotNull();
-        assertThat(entityManager).isNotNull();
+//        assertThat(entityManager).isNotNull();
 //        assertThat(userRepository).isNotNull();
     }
 
@@ -51,7 +51,7 @@ class JpaMultipleEntityRepositoryTest {
     void injectedComponentsAreNotNull2() {
         assertThat(dataSource).isNotNull();
         assertThat(jdbcTemplate).isNotNull();
-        assertThat(entityManager).isNotNull();
+//        assertThat(entityManager).isNotNull();
 //        assertThat(userRepository).isNotNull();
     }
 }

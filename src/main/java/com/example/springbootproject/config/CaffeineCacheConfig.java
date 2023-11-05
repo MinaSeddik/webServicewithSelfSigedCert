@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 @EnableCaching
 @Configuration
+@Profile("Caffeine")
 public class CaffeineCacheConfig {
 
 /*
