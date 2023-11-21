@@ -7,11 +7,10 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
-//https://stackoverflow.com/questions/52999004/subscribemapping-vs-messagemapping
 @Configuration
 @EnableWebSocketMessageBroker
-//@Profile("stomp-web-socket-memory")
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+@Profile("stomp-web-socket-rabbit")
+public class RabbitWebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     // for regular connection ws://localhost:8443/mywebsockets
     /*
@@ -38,6 +37,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         --header "Sec-WebSocket-Version: 13" \
     https://localhost:8443/mywebsockets
     */
+
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // to be used without SockJS; to test with curl like the command above
@@ -58,15 +58,19 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 //
     }
 
-
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry config) {
-
-        // Creates the in-memory message broker with one or more destinations
-        config.enableSimpleBroker("/topic/", "/queue/");
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
 
         // Defines the prefix app that is used to filter destinations handled by methods annotated with @MessageMapping
-        config.setApplicationDestinationPrefixes("/app");
+        registry.setApplicationDestinationPrefixes("/app");
+
+        // Use RabbitMQ message broker
+        registry.enableStompBrokerRelay("/topic")
+                .setRelayHost("localhost")
+                .setRelayPort(61613)
+                .setClientLogin("guest")
+                .setClientPasscode("guest");
     }
+
 
 }

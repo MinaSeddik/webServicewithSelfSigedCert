@@ -18,6 +18,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
+// to enable this endpoint, you should out it into management.endpoints.web.exposure.include in application.properties
+
 @Component
 @Endpoint(id = "cache-manager")
 @Slf4j

@@ -1,0 +1,63 @@
+# JMH version: 1.33
+# VM version: JDK 11.0.16, OpenJDK 64-Bit Server VM, 11.0.16+8-post-Ubuntu-0ubuntu120.04
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -Djava.util.concurrent.ForkJoinPool.common.parallelism=4
+# Blackhole mode: full + dont-inline hint (default, use -Djmh.blackhole.autoDetect=true to auto-detect)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: benchmarck_jmh.AnotherBenchMarkwithParameter.heap
+# Parameters: (size = 128)
+
+# Run progress: 0.00% complete, ETA 00:09:00
+# Warmup Fork: 1 of 2
+# Warmup Iteration   1: 41157830.386 ops/s
+# Warmup Iteration   2: 45439071.284 ops/s
+# Warmup Iteration   3: 45506167.645 ops/s
+Iteration   1: 43958518.094 ops/s
+Iteration   2: 45491009.700 ops/s
+Iteration   3: 45243587.312 ops/s
+
+# Run progress: 11.11% complete, ETA 00:08:02
+# Warmup Fork: 2 of 2
+# Warmup Iteration   1: 39703677.330 ops/s
+# Warmup Iteration   2: 42515770.227 ops/s
+# Warmup Iteration   3: 44415314.822 ops/s
+Iteration   1: 45221641.916 ops/s
+Iteration   2: 45821254.317 ops/s
+Iteration   3: 42903557.571 ops/s
+
+# Run progress: 22.22% complete, ETA 00:07:02
+# Fork: 1 of 1
+# Warmup Iteration   1: 40804784.122 ops/s
+# Warmup Iteration   2: 44162692.664 ops/s
+# Warmup Iteration   3: 44533096.363 ops/s
+Iteration   1: 44685656.468 ops/s
+Iteration   2: 43428167.489 ops/s
+Iteration   3: 44719232.092 ops/s
+
+
+Result "benchmarck_jmh.AnotherBenchMarkwithParameter.heap":
+  44277685.350 ±(99.9%) 13425474.535 ops/s [Average]
+  (min, avg, max) = (43428167.489, 44277685.350, 44719232.092), stdev = 735895.562
+  CI (99.9%): [30852210.814, 57703159.885] (assumes normal distribution)
+
+
+# JMH version: 1.33
+# VM version: JDK 11.0.16, OpenJDK 64-Bit Server VM, 11.0.16+8-post-Ubuntu-0ubuntu120.04
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -Djava.util.concurrent.ForkJoinPool.common.parallelism=4
+# Blackhole mode: full + dont-inline hint (default, use -Djmh.blackhole.autoDetect=true to auto-detect)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: benchmarck_jmh.AnotherBenchMarkwithParameter.heap
+# Parameters: (size = 1024)
+
+# Run progress: 33.33% complete, ETA 00:06:02
+# Warmup Fork: 1 of 2
+# Warmup Iteration   1: 

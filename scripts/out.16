@@ -1,0 +1,89 @@
+# JMH version: 1.33
+# VM version: JDK 11.0.16, OpenJDK 64-Bit Server VM, 11.0.16+8-post-Ubuntu-0ubuntu120.04
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -Djava.util.concurrent.ForkJoinPool.common.parallelism=16
+# Blackhole mode: full + dont-inline hint (default, use -Djmh.blackhole.autoDetect=true to auto-detect)
+# Warmup: 5 iterations, 55 ms each
+# Measurement: 4 iterations, 44 ms each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: benchmarck_jmh.BenchmarkMain.testIntern
+
+# Run progress: 0.00% complete, ETA 00:00:02
+# Warmup Fork: 1 of 2
+# Warmup Iteration   1: 187.492 ops/s
+# Warmup Iteration   2: 316.624 ops/s
+# Warmup Iteration   3: 536.518 ops/s
+# Warmup Iteration   4: 452.030 ops/s
+# Warmup Iteration   5: 446.383 ops/s
+Iteration   1: 443.676 ops/s
+Iteration   2: 416.731 ops/s
+Iteration   3: 312.136 ops/s
+Iteration   4: 293.527 ops/s
+
+# Run progress: 20.00% complete, ETA 00:00:03
+# Warmup Fork: 2 of 2
+# Warmup Iteration   1: 118.801 ops/s
+# Warmup Iteration   2: 227.454 ops/s
+# Warmup Iteration   3: 481.206 ops/s
+# Warmup Iteration   4: 450.006 ops/s
+# Warmup Iteration   5: 440.709 ops/s
+Iteration   1: 445.929 ops/s
+Iteration   2: 439.925 ops/s
+Iteration   3: 432.185 ops/s
+Iteration   4: 430.127 ops/s
+
+# Run progress: 40.00% complete, ETA 00:00:02
+# Fork: 1 of 3
+# Warmup Iteration   1: 138.177 ops/s
+# Warmup Iteration   2: 267.541 ops/s
+# Warmup Iteration   3: 336.022 ops/s
+# Warmup Iteration   4: 331.137 ops/s
+# Warmup Iteration   5: 313.362 ops/s
+Iteration   1: 383.523 ops/s
+Iteration   2: 223.992 ops/s
+Iteration   3: 414.994 ops/s
+Iteration   4: 343.138 ops/s
+
+# Run progress: 60.00% complete, ETA 00:00:01
+# Fork: 2 of 3
+# Warmup Iteration   1: 202.636 ops/s
+# Warmup Iteration   2: 287.276 ops/s
+# Warmup Iteration   3: 480.904 ops/s
+# Warmup Iteration   4: 346.338 ops/s
+# Warmup Iteration   5: 381.092 ops/s
+Iteration   1: 265.814 ops/s
+Iteration   2: 432.882 ops/s
+Iteration   3: 429.204 ops/s
+Iteration   4: 357.996 ops/s
+
+# Run progress: 80.00% complete, ETA 00:00:00
+# Fork: 3 of 3
+# Warmup Iteration   1: 122.838 ops/s
+# Warmup Iteration   2: 216.920 ops/s
+# Warmup Iteration   3: 224.243 ops/s
+# Warmup Iteration   4: 467.562 ops/s
+# Warmup Iteration   5: 452.546 ops/s
+Iteration   1: 412.287 ops/s
+Iteration   2: 447.912 ops/s
+Iteration   3: 399.573 ops/s
+Iteration   4: 255.102 ops/s
+
+
+Result "benchmarck_jmh.BenchmarkMain.testIntern":
+  363.868 ±(99.9%) 97.843 ops/s [Average]
+  (min, avg, max) = (223.992, 363.868, 447.912), stdev = 76.389
+  CI (99.9%): [266.025, 461.711] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:00:03
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                  Mode  Cnt    Score    Error  Units
+BenchmarkMain.testIntern  thrpt   12  363.868 ± 97.843  ops/s

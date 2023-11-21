@@ -48,7 +48,7 @@ public class WebSocketTest {
         log.info("Connecting to {}", url);
         Future<StompSession> stompSessionFuture = stompClient.connect(url, sessionHandler);
 
-        log.info("Retreive session from connection ...");
+        log.info("Retrieve session from connection ...");
         StompSession session = stompSessionFuture.get();
 
         log.info("Sleep 5 seconds ...");

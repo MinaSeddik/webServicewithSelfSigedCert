@@ -7,6 +7,9 @@ import java.time.Instant;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+// to enable this endpoint, you should out it into management.endpoints.web.exposure.include in application.properties
+
+
 public class ReactiveServerTimeEndpoint {
     private Mono<Long> getNtpTimeOffset() { // (2)
         // Actual network call to get the current time offset
