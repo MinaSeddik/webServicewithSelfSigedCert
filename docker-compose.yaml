@@ -1,0 +1,85 @@
+services:
+  mysqldb:
+    image: mysql:8.3.0
+    container_name: myapp-mysql-server
+    restart: unless-stopped       # it is similar to the "always" flag the only difference is once the container is stopped manually it will not restart automatically even after restarting the docker daemon
+    env_file: .env.docker
+    environment:
+      - MYSQL_ROOT_PASSWORD='my-secret-pw'    # MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+#      - MYSQL_DATABASE='myapp'                # MYSQL_DATABASE=$MYSQLDB_DATABASE
+#      - MYSQL_USER='mina'                     # MYSQL_USER=$MYSQL_USER
+#      - MYSQL_PASSWORD='#Mina_1234$'          # MYSQL_PASSWORD=$MYSQL_PASSWORD
+    ports:
+      - 3306:3306
+    volumes:
+      - "/home/mina/Desktop/mysql/config/my.conf:/etc/mysql/conf.d/config-file.cnf"
+      - "/home/mina/Desktop/mysql/data:/var/lib/mysql:rw"            # Mysql data dir
+    networks:
+      - myapp-net
+
+  redis-server:
+    image: redis:7.2.4
+    container_name: myapp-redis-server
+    restart: unless-stopped       # it is similar to the "always" flag the only difference is once the container is stopped manually it will not restart automatically even after restarting the docker daemon
+    env_file: .env.docker
+    ports:
+      - 6379:6379
+    networks:
+      - myapp-net
+
+
+  rabbitmq-server:
+    image: rabbitmq:3-management
+    container_name: myapp-rabbitmq-server
+    restart: unless-stopped       # it is similar to the "always" flag the only difference is once the container is stopped manually it will not restart automatically even after restarting the docker daemon
+    env_file: .env.docker
+    ports:
+      - 5672:5672
+      - 15672:15672             #Management Port - default user:pass = guest:guest
+    networks:
+      - myapp-net
+
+
+  application:
+    depends_on:
+      - mysqldb
+      - redis-server
+      - rabbitmq-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: myapp-server
+    restart: on-failure       # will issue a restart if the exit code indicated a failure
+    env_file: .env.docker
+    ports:
+      - 8080:8080
+    environment:
+      - spring.datasource.jdbc-url=jdbc:mysql://mysqldb:3306/myapp?profileSQL=true&rewriteBatchedStatements=true
+      - spring.datasource.username=mina
+      - spring.datasource.password=#Mina_1234$
+      - spring.redis.database=0
+      - spring.redis.host=redis-server
+      - spring.redis.port=6379
+      - spring.rabbitmq.host=rabbitmq-server
+      - spring.rabbitmq.virtualhost=/
+      - spring.rabbitmq.port=5672
+      - spring.rabbitmq.username=guest
+      - spring.rabbitmq.password=guest
+    volumes:
+      - "/var/log/myapp/logs:/var/log/myapp/logs:rw"      # for application logging
+    networks:
+      - myapp-net
+    stdin_open: true
+    tty: true               # keep open the terminal after building container
+
+networks:
+  myapp-net:
+    name: myapp-net
+    driver: bridge
+
+
+# Usage :
+# --------
+#  docker compose config to validate the docker-compose.yaml file before running
+#  docker compose up -d --no-deps --build
+#  docker compose down

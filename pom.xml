@@ -339,15 +339,15 @@
         <!--            <version>2.6.8</version>-->
         <!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.flywaydb</groupId>-->
+<!--            <artifactId>flyway-core</artifactId>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-mysql</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.flywaydb</groupId>-->
+<!--            <artifactId>flyway-mysql</artifactId>-->
+<!--        </dependency>-->
 
         <!--        // non spring boot-->
         <dependency>
@@ -547,6 +547,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${project.parent.version}</version>
                 <configuration>
+                    <executable>true</executable>
+                    <mainClass>com.example.springbootproject.SpringbootProjectApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -557,7 +559,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>build-info</goal>
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>

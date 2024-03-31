@@ -1,0 +1,48 @@
+
+
+# start mysql server  with mount option data-dir and config-dir
+docker container run -d --name my-mysql-server \
+    -e MYSQL_ROOT_PASSWORD=my-secret-pw \
+    -v /home/mina/Desktop/mysql/config/my.conf:/etc/mysql/conf.d/config-file.cnf \
+    -v /home/mina/Desktop/mysql/data:/var/lib/mysql:rw \
+    mysql:8.3.0
+
+
+
+# get data from teh original mysql server (Docker host)
+mysqldump --single-transaction -h 127.0.0.1 -P 3306 -u mina -p#Mina_1234$ \
+    --add-drop-database --databases myapp --routines --create-options \
+    --dump-date --verbose > /home/mina/Desktop/myapp/backup.sql
+
+# put the backed data to the docker mysql server image
+# first get the IP Address of the running mysql server container
+docker inspect my-mysql-server | grep IPAddress
+# then use it to recover the dump file
+# docker container run --rm mysql:8.3.0 mysql -h 172.17.0.2 -u root -p < /home/mina/Desktop/myapp/backup.sql
+# enter password = my-secret-pw
+docker container run -it --rm -v /home/mina/Desktop/myapp/:/myapp mysql:8.3.0 bash
+# inside the container
+mysql -h 172.17.0.2 -u root -p < /myapp/backup.sql
+# enter password = my-secret-pw
+
+# Create Application user
+CREATE USER 'mina'@'%' IDENTIFIED BY '#Mina_1234$';
+GRANT ALL ON myapp.* TO 'mina'@'%';
+
+
+
+# go inside mysql server
+docker container exec -it my-mysql-server bash
+
+
+# connect to mysql server
+docker container run -it --rm mysql:8.3.0 mysql -u root -p
+# enter password = my-secret-pw
+
+
+Create script to add restricted user to the application
+
+
+
+
+
